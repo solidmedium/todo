@@ -1,0 +1,9 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "Simple to list",
+  "main": "index.js",
+  "author": "Davin McDonald",
+  "license": "MIT",
+  "private": true
+}
