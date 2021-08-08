@@ -1,6 +1,5 @@
 
 let modalComponent = {
-  id: null,
   title: 'Add New Todo',
   value: '',
   renderHTML() {
@@ -14,15 +13,12 @@ let modalComponent = {
           </button>
         </div>
         <div class="modal-body">
-            <div>
+            <div class="input-container">
               <input type="text" placeholder="${this.title}" id="input-add-todo" class="form-control" id="" value="${this.value}">
-            </div>
-            <div>
-            <button type="button" id="btn-save-todo" class="btn btn-green">Submit</button>
+              <button type="button" id="btn-save-todo" class="btn btn-blue">GO</button>
             </div>
         </div>
       </div>
-      
     `;
 
     return html.trim();
@@ -38,7 +34,7 @@ function renderTable(data) {
   dataIsolated.map(items => {
     
     const btns = `
-      <button type="button" class="btn btn-blue btn-complete">Edit</button>
+      <button type="button" onclick="renderModal(${items.id});" class="btn btn-blue btn-edit">Edit</button>
       <button type="button" class="btn btn-red btn-delete">Delete</button>
     `;
 

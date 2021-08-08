@@ -33,18 +33,24 @@ const todo = {
 ######### METHODS #########
 ######################### */
 
-
-
 const closeModal = () => {
   // Remove modal from DOM
   const modal = document.getElementById('modal');
   modal.remove();
 }
 
-const renderModal = () => {
+const renderModal = (id) => {
+ 
   // Generate new modal object
   const modal = Object.create(modalComponent);
   modal.title = 'Add New Todo';
+
+  // check if value is int to  prime edit
+  if (id === parseInt(id, 10)) {
+    const val = data.filter(p => p.id === id);
+    modal.value = val[0].name;
+  }
+
   const newModal = modal.renderHTML();
   const mount = document.getElementById('modal-mount-point');
   // Add modal to the DOM
@@ -64,9 +70,8 @@ const renderModal = () => {
 
 const recordValue = (e) => {
  
-  todo.value.push(e);
+  todo.value = document.getElementById("input-add-todo").value;
 
-  console.log(todo.value);
 }
 
 const loadApp = () => {
