@@ -1,0 +1,132 @@
+// theme grays
+$theme-gray-lighter: #F6F9FC;
+$theme-gray-light: #CDD5DE;
+$theme-gray: #8898AD;
+$theme-gray-dark: #425466;
+$theme-gray-darker: #0A2547;
+
+// colours
+$blue:    #0d6efd;
+$indigo:  #6610f2;
+$purple:  #6f42c1;
+$pink:    #d63384;
+$red:     #dc3545;
+$orange:  #fd7e14;
+$yellow:  #ffc107;
+$green:   #198754;
+$teal:    #20c997;
+$cyan:    #0dcaf0;
+
+
+body {
+	color: $theme-gray-dark;
+	background-color: $theme-gray-lighter;
+}
+
+.container {
+	max-width: 800px;
+	padding: 0 20px;
+	margin: 3rem auto;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.table {
+	width: 100%;
+
+	thead {
+		th {
+		    vertical-align: bottom;
+		    border-bottom: 2px solid $theme-gray;
+		    padding: 1rem;
+
+
+
+		    &:first-of-type {
+		    	padding-left: 0;
+		    }
+
+		    &:last-of-type {
+		    	text-align: right;
+		    	padding-right: 0;
+		    }
+		}
+	}
+
+	tbody {
+
+		tr {
+			 &:hover {
+		    	background-color: darken($theme-gray-lighter, 5%);
+		    }
+		}
+
+		td {
+			vertical-align: middle;
+		    border-bottom: 1px solid $theme-gray;
+		    padding: 1rem;
+
+		    &:first-of-type {
+		    	padding-left: 0;
+		    }
+
+		    &:last-of-type {
+		    	text-align: right;
+		    	padding-right: 0;
+		    }
+		}
+	}
+}
+
+.btn {
+	background-color: white;
+	border: solid 1px $theme-gray-dark;
+	color: $theme-gray-dark;
+	border-radius: 20px;
+	padding: 2px 15px;
+	font-size: .9rem;
+	transition: all ease .3s;
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: white !important;
+		cursor: pointer;
+		outline: 0;
+	}
+
+	&.btn-green {
+		border: solid 1px $green;
+		color: $green;
+
+		&:hover,
+		&:focus,
+		&:active {
+			background-color: $green;
+		}
+	}
+
+	&.btn-blue {
+		border: solid 1px $blue;
+		color: $blue;
+
+		&:hover,
+		&:focus,
+		&:active {
+			background-color: $blue;
+		}
+	}
+
+	&.btn-red {
+		border: solid 1px $red;
+		color: $red;
+
+		&:hover,
+		&:focus,
+		&:active {
+			background-color: $red;
+		}
+	}
+}

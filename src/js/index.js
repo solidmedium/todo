@@ -28,8 +28,8 @@ function renderTable() {
   dataIsolated.map(items => {
     
     const btns = `
-      <button type="button" class="btn btn-delete">Delete</button>
-      <button type="button" class="btn btn-complete">Complete</button>
+      <button type="button" class="btn btn-blue btn-complete">Edit</button>
+      <button type="button" class="btn btn-red btn-delete">Delete</button>
     `;
 
     rows += `
@@ -44,13 +44,13 @@ function renderTable() {
 
   const addBtn = `
     <div class="text-right">
-      <button type="button" class="btn btn-launch-modal">Add New Todo +</button>
+      <button type="button" class="btn btn-green btn-launch-modal" onClick="renderModal()">Add New Todo +</button>
     </div>
   `;
 
   const table = `
     ${addBtn}
-    <table class="table table-bordered">
+    <table class="table">
       <thead>
         <tr>
           <th>Todo</th>
