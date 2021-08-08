@@ -33,6 +33,10 @@ body {
 	text-align: right;
 }
 
+.text-center {
+	text-align: center;
+}
+
 .table {
 	width: 100%;
 
@@ -41,8 +45,6 @@ body {
 		    vertical-align: bottom;
 		    border-bottom: 2px solid $theme-gray;
 		    padding: 1rem;
-
-
 
 		    &:first-of-type {
 		    	padding-left: 0;
@@ -128,5 +130,59 @@ body {
 		&:active {
 			background-color: $red;
 		}
+
+		&.close {
+			width: 40px;
+			height: 40px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+
+	&#btn-launch-modal {
+		margin-bottom: 2rem;
+	}
+}
+
+.modal {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-color: white;
+	display: flex;
+	flex-flow: column;
+
+	.modal-header {
+		display: flex;
+		justify-content: space-between;
+		padding: 1rem;
+	}
+
+	.modal-body {
+	    display: flex;
+	    height: 100%;
+	    flex-grow: 1;
+	    min-width: 100%;
+	    align-items: center;
+	    justify-content: center;
+	}
+
+}
+
+.form-control {
+	border: 0;
+	height: 50px;
+	width: 400px;
+	border-bottom: solid 2px $theme-gray-light;
+	margin-bottom: 1rem;
+
+	&:focus,
+	&:active {
+		outline: 0;
+		border-bottom: solid 2px $theme-gray;
+
 	}
 }

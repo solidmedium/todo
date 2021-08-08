@@ -10,6 +10,9 @@ body {
 .text-right {
   text-align: right; }
 
+.text-center {
+  text-align: center; }
+
 .table {
   width: 100%; }
   .table thead th {
@@ -60,5 +63,44 @@ body {
     color: #dc3545; }
     .btn.btn-red:hover, .btn.btn-red:focus, .btn.btn-red:active {
       background-color: #dc3545; }
+    .btn.btn-red.close {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+  .btn#btn-launch-modal {
+    margin-bottom: 2rem; }
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  display: flex;
+  flex-flow: column; }
+  .modal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem; }
+  .modal .modal-body {
+    display: flex;
+    height: 100%;
+    flex-grow: 1;
+    min-width: 100%;
+    align-items: center;
+    justify-content: center; }
+
+.form-control {
+  border: 0;
+  height: 50px;
+  width: 400px;
+  border-bottom: solid 2px #CDD5DE;
+  margin-bottom: 1rem; }
+  .form-control:focus, .form-control:active {
+    outline: 0;
+    border-bottom: solid 2px #8898AD; }
 
 /*# sourceMappingURL=theme.css.map */

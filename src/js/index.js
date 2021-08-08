@@ -1,3 +1,8 @@
+import {
+  modalComponent,
+  renderTable
+} from './components.js';
+
 let data = [
   {
     id: 1,
@@ -20,60 +25,59 @@ let data = [
   } 
 ];
 
-function renderTable() {
+const todo = {
+  value: []
+};
 
-  const dataIsolated = data.filter(p => p.publish);
+/* ########################
+######### METHODS #########
+######################### */
 
-  let rows = [];
-  dataIsolated.map(items => {
-    
-    const btns = `
-      <button type="button" class="btn btn-blue btn-complete">Edit</button>
-      <button type="button" class="btn btn-red btn-delete">Delete</button>
-    `;
 
-    rows += `
-        <tr>
-          <td>${items.name}</td>
-          <td>${items.priority}</td>
-          <td>${items.complete}</td>
-          <td>${btns}</td>
-        </tr>
-    `;
-  });
 
-  const addBtn = `
-    <div class="text-right">
-      <button type="button" class="btn btn-green btn-launch-modal" onClick="renderModal()">Add New Todo +</button>
-    </div>
-  `;
-
-  const table = `
-    ${addBtn}
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Todo</th>
-          <th>Priority</th>
-          <th>Complete</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${rows}
-      </tbody>
-    </table>
-  `;
-
-  return table;
+const closeModal = () => {
+  // Remove modal from DOM
+  const modal = document.getElementById('modal');
+  modal.remove();
 }
 
-function loadApp() {
-  
-  const tableHTML = renderTable();
-  const table = document.getElementById('app-mount-point');
+const renderModal = () => {
+  // Generate new modal object
+  const modal = Object.create(modalComponent);
+  modal.title = 'Add New Todo';
+  const newModal = modal.renderHTML();
+  const mount = document.getElementById('modal-mount-point');
+  // Add modal to the DOM
+  mount.innerHTML = newModal;
 
-  table.innerHTML = tableHTML;
+  // Automatically add focus to the input with the modal
+  const input = document.getElementById('input-add-todo');
+  input.focus();
+
+  // Add listener to close modal button
+  document.getElementById("btn-close-modal").addEventListener("click", closeModal);
+
+  // add listener to input
+  document.getElementById("input-add-todo").addEventListener("keyup", recordValue);
+
+}
+
+const recordValue = (e) => {
+ 
+  todo.value.push(e);
+
+  console.log(todo.value);
+}
+
+const loadApp = () => {
+  
+  const tableHTML = renderTable(data);
+  const mount = document.getElementById('app-mount-point');
+
+  mount.innerHTML = tableHTML;
+
+  // Listen for add todo click
+  document.getElementById("btn-launch-modal").addEventListener("click", renderModal);
 
 }
 
