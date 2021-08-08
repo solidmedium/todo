@@ -2,8 +2,25 @@
   "name": "todo",
   "version": "1.0.0",
   "description": "Simple to list",
-  "main": "index.js",
-  "author": "Davin McDonald",
+  "author": "Davin McDonald <davin@solidmedium.com.au>",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "repository": "https://github.com/solidmedium/todo.git",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-rollup": "^2.17.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^2.6.5"
+  },
+  "dependencies": {
+
+  }
 }
