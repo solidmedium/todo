@@ -2,7 +2,23 @@
 let modalComponent = {
   title: 'Add New Todo',
   value: '',
+  delete: false,
   renderHTML() {
+
+    let form = '';
+    if (this.delete) {
+      form = `
+        <h1>Your are about to delete this item</h1>
+        <button type="button" id="btn-delete-todo" class="btn btn-red">Confirm Delete</button>
+      `;
+    } else {
+      form = `
+        <div class="input-container">
+          <input type="text" placeholder="${this.title}" id="input-add-todo" class="form-control" id="" value="${this.value}">
+          <button type="button" id="btn-save-todo" class="btn btn-blue">GO</button>
+        </div>
+      `;
+    }
 
     const html = `
       <div class="modal" id="modal">
@@ -13,10 +29,7 @@ let modalComponent = {
           </button>
         </div>
         <div class="modal-body">
-            <div class="input-container">
-              <input type="text" placeholder="${this.title}" id="input-add-todo" class="form-control" id="" value="${this.value}">
-              <button type="button" id="btn-save-todo" class="btn btn-blue">GO</button>
-            </div>
+           ${form}
         </div>
       </div>
     `;
@@ -35,7 +48,7 @@ function renderTable(data) {
     
     const btns = `
       <button type="button" onclick="renderModal(${items.id});" class="btn btn-blue btn-edit">Edit</button>
-      <button type="button" class="btn btn-red btn-delete">Delete</button>
+      <button type="button" onclick="renderDeleteModal(${items.id});" class="btn btn-red btn-delete">Delete</button>
     `;
 
     rows += `

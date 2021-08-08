@@ -68,6 +68,17 @@ const renderModal = (id) => {
 
 }
 
+const renderDeleteModal = (id) => {
+
+  // Generate new modal object
+  const modal = Object.create(modalComponent);
+  modal.delete = true;
+  const newModal = modal.renderHTML();
+  const mount = document.getElementById('modal-mount-point');
+  // Add modal to the DOM
+  mount.innerHTML = newModal;
+}
+
 const recordValue = (e) => {
  
   todo.value = document.getElementById("input-add-todo").value;
@@ -80,6 +91,9 @@ const loadApp = () => {
   const mount = document.getElementById('app-mount-point');
 
   mount.innerHTML = tableHTML;
+
+  // Listen for add todo click
+  document.getElementById("btn-launch-modal").addEventListener("click", renderModal);
 
   // Listen for add todo click
   document.getElementById("btn-launch-modal").addEventListener("click", renderModal);
