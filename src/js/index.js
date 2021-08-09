@@ -7,20 +7,32 @@ let data = [
   {
     id: 1,
     name: 'Take out the trash',
-    priority: false,
-    complete: false,
+    priority: 0,
+    complete: 0,
     publish: true
   }, {
     id: 2,
     name: 'Bring in the trash',
-    priority: false,
-    complete: false,
+    priority: 0,
+    complete: 0,
     publish: true
   },  {
     id: 3,
     name: 'Walk the dog',
-    priority: true,
-    complete: false,
+    priority: 1,
+    complete: 0,
+    publish: true
+  },  {
+    id: 4,
+    name: 'Get the job',
+    priority: 0,
+    complete: 0,
+    publish: true
+  },  {
+    id: 5,
+    name: 'zalk the cat',
+    priority: 1,
+    complete: 0,
     publish: true
   } 
 ];
@@ -116,8 +128,8 @@ const saveValue = (e) => {
     data.push({
       id: count + 1,
       name: value,
-      priority: false,
-      complete: false,
+      priority: 0,
+      complete: 0,
       publish: true
     });
   }
@@ -160,9 +172,36 @@ const toggleHandler = (...params) => {
 
 const sortHandler = (...params) => {
 
-  if (!params[1]) return;
+  if (!params[0]) return;
 
-  console.log('hello')
+  if (params[0] === 1) {
+
+    active.sortPriority = !active.sortPriority;
+
+    if (active.sortPriority) {
+      // this method is taken from https://stackoverflow.com/questions/979256/sorting-an-array-of-objects-by-property-values
+      data.sort((a, b) => parseFloat(b.priority) - parseFloat(a.priority));
+    } else {
+      data.sort((a, b) => parseFloat(a.priority) - parseFloat(b.priority));
+    }
+
+  } else {
+    
+    active.sortName = !active.sortName;
+
+    if (active.sortName) {
+      // this method is taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
+      data.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+    } else {
+      data.sort((a,b) => (b.name > a.name) ? 1 : ((a.name > b.name) ? -1 : 0));
+    }
+
+  }
+
+
+  console.log(active);
+
+  loadApp();
 
 }
 

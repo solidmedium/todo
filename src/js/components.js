@@ -106,12 +106,14 @@ function renderTable(data, active) {
  
   // sort UI
   const sortUI = `
-    <label>
-      <input type="checkbox"${sortName} onchange="sortHandler(${sortNameParams});" class="custom-control-input"> Sort by Name
+    <div>
+    <label style="margin-right: 1rem">
+      <input type="checkbox"${sortName} id="checkbox-sort-name" name="checkbox-sort" onchange="sortHandler(${sortNameParams});" class="custom-control-input"> Sort by Name
     </label>
     <label>
-      <input type="checkbox"${sortPriority} onchange="sortHandler(${sortPriorityParams});" class="custom-control-input"> Sort by Priority
+      <input type="checkbox"${sortPriority} id="checkbox-sort-priority" name="checkbox-sort" onchange="sortHandler(${sortPriorityParams});" class="custom-control-input"> Sort by Priority
     </label>
+    </div>
   `;
 
   // assemble the table
