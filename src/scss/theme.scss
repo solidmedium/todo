@@ -53,6 +53,10 @@ body {
 		    border-bottom: 2px solid $theme-gray;
 		    padding: 1rem;
 
+		    &:first-of-type {
+		    	width: 355px;
+		    }
+
 		    &:last-of-type {
 		    	text-align: right;
 		    }

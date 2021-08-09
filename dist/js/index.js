@@ -63,31 +63,37 @@ function renderTable(data, active) {
 
 var data = [{
   id: 1,
-  name: 'Take out the trash',
-  priority: 0,
-  complete: 0,
+  name: 'Apply for position @ Rocket',
+  priority: 1,
+  complete: 1,
   publish: true
 }, {
   id: 2,
-  name: 'Bring in the trash',
+  name: 'Explain to 2 year old that not everything can be solved through kicking',
   priority: 0,
-  complete: 0,
+  complete: 1,
   publish: true
 }, {
   id: 3,
-  name: 'Walk the dog',
+  name: 'Complete coding challenge',
   priority: 1,
-  complete: 0,
+  complete: 1,
   publish: true
 }, {
   id: 4,
-  name: 'Get the job',
+  name: 'Invesigate advanced cross stitch methods',
   priority: 0,
   complete: 0,
   publish: true
 }, {
   id: 5,
-  name: 'zalk the cat',
+  name: 'Start telling people about the sweet NFT\'s you have',
+  priority: 0,
+  complete: 1,
+  publish: true
+}, {
+  id: 6,
+  name: 'Land dream job @ Rocket',
   priority: 1,
   complete: 0,
   publish: true
@@ -137,9 +143,15 @@ var renderModal = function renderModal() {
   }
 
   var newModal = modal.renderHTML();
-  var mount = document.getElementById('modal-mount-point'); // Add modal to the DOM
+  var mount = document.getElementById('modal-mount-point');
 
-  mount.innerHTML = newModal;
+  if (params[2]) {
+    // return true function for tests
+    return true;
+  } else {
+    // Add modal to the DOM
+    mount.innerHTML = newModal;
+  }
 
   if (!params[1] || params[1] === 1) {
     // Automatically add focus to the input in the modal
@@ -215,7 +227,9 @@ var toggleHandler = function toggleHandler() {
 
   active.id = '';
   active.action = '';
-  console.log(data);
+  console.log(data, arguments.length <= 2 ? undefined : arguments[2]); // return true if running test
+
+  if (arguments.length <= 2 ? undefined : arguments[2]) return true;
   loadApp();
 };
 
@@ -250,11 +264,15 @@ var sortHandler = function sortHandler() {
     }
   }
 
-  console.log(active);
+  console.log(active); // return true if running tests
+
+  if (arguments.length <= 1 ? undefined : arguments[1]) return true;
   loadApp();
 };
 
 var loadApp = function loadApp() {
+  active.id = '';
+  active.action = '';
   var tableHTML = renderTable(data, active);
   var mount = document.getElementById('app-mount-point');
   mount.innerHTML = tableHTML; // Listen for add todo click
