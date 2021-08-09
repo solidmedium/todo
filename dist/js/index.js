@@ -169,8 +169,17 @@ var renderModal = function renderModal() {
   }, 100);
 };
 
-var saveValue = function saveValue(e) {
-  var value = document.getElementById("input-add-todo").value; // Delete function
+var saveValue = function saveValue() {
+  var value = '';
+
+  if (arguments.length <= 1 ? undefined : arguments[1]) {
+    // set value when running tests
+    value = 'Test item';
+    active.action = '';
+  } else {
+    value = document.getElementById("input-add-todo").value;
+  } // Delete function
+
 
   if (active.action === 2) {
     // isolate item to delete
@@ -204,6 +213,16 @@ var saveValue = function saveValue(e) {
   active.id = '';
   active.action = '';
   console.log(data);
+
+  if (arguments.length <= 1 ? undefined : arguments[1]) {
+    // isolate new test item
+    var testDataIsolated = data.filter(function (p) {
+      return p.id === 7;
+    }); // return out of function
+
+    return testDataIsolated;
+  }
+
   closeModal();
   loadApp();
 };

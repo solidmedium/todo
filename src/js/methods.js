@@ -124,9 +124,16 @@ const renderModal = (...params) => {
   }, 100);
 }
 
-const saveValue = (e) => {
-
-  const value = document.getElementById("input-add-todo").value;
+const saveValue = (...params) => {
+  
+  let value = '';
+  if (params[1]) {
+    // set value when running tests
+    value = 'Test item';
+    active.action = '';
+  } else {
+    value = document.getElementById("input-add-todo").value;
+  }
 
   // Delete function
   if (active.action === 2) {
@@ -163,8 +170,14 @@ const saveValue = (e) => {
 
   console.log(data);
 
-  closeModal();
+  if (params[1]) {
+    // isolate new test item
+    const testDataIsolated = data.filter(p => p.id === 7);
+    // return out of function
+    return testDataIsolated;
+  } 
 
+  closeModal();
   loadApp();
 }
 

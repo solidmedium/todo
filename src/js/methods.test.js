@@ -25,3 +25,12 @@ test('Render Modal', () => {
 	expect(methods.renderModal(...params)).toBe(true);
 });
 
+test('Save New Item', () => {
+
+	const params = [1, 2];
+
+	const arr = [{ id: 7, name: 'Test item', priority: 0, complete: 0, publish: true }];
+
+	expect(JSON.stringify(methods.saveValue(...params))).toBe(JSON.stringify(arr));
+});
+
