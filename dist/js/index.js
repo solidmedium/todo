@@ -10,7 +10,7 @@ var modalComponent = {
     if (this["delete"]) {
       form = "\n        <div class=\"input-container\">\n          <h2>Your are about to delete this item</h2>\n          <input type=\"text\" disabled id=\"input-add-todo\" class=\"form-control\" id=\"\" value=\"".concat(this.value, "\">\n          <button type=\"button\" id=\"btn-save-todo\" class=\"btn btn-red\">Confirm Delete</button>\n        </div>\n      ");
     } else {
-      form = "\n        <div class=\"input-container\">\n          <input type=\"text\" placeholder=\"".concat(this.title, "\" id=\"input-add-todo\" class=\"form-control\" id=\"\" value=\"").concat(this.value, "\">\n          <button type=\"button\" id=\"btn-save-todo\" class=\"btn btn-blue\">GO</button>\n        </div>\n      ");
+      form = "\n        <div class=\"input-container\">\n          <input type=\"text\" placeholder=\"".concat(this.title, "\" id=\"input-add-todo\" class=\"form-control\" id=\"\" value=\"").concat(this.value, "\">\n          <button type=\"button\" id=\"btn-save-todo\" class=\"btn btn-green\">GO</button>\n        </div>\n      ");
     }
 
     var html = "\n      <div class=\"modal\" id=\"modal\">\n        <div class=\"modal-header\">\n          <h4 class=\"modal-title\"></h4>\n          <button type=\"button\" class=\"close btn btn-red\" id=\"btn-close-modal\">\n            <span aria-hidden=\"true\">X</span>\n          </button>\n        </div>\n        <div class=\"modal-body\">\n           ".concat(form, "\n        </div>\n      </div>\n    ");
@@ -18,25 +18,47 @@ var modalComponent = {
   }
 };
 
-function renderTable(data) {
+function renderTable(data, active) {
   // Remove unpublished/deleted items from the array
   var dataIsolated = data.filter(function (p) {
     return p.publish;
   });
   console.log(dataIsolated);
   var rows = [];
+  var countTotal = 0;
+  var countComplete = 0;
   dataIsolated.map(function (items) {
-    var editParams = [items.id, 1];
-    var deleteParams = [items.id, 2];
-    var btns = "\n      <button type=\"button\" data-type=\"edit\" onclick=\"renderModal(".concat(editParams, ");\" class=\"btn btn-blue btn-edit\">Edit</button>\n      <button type=\"button\" data-type=\"delete\" onclick=\"renderModal(").concat(deleteParams, ");\" class=\"btn btn-red btn-delete\">Delete</button>\n    ");
+    countTotal += 1; // total no of rows
+
+    if (items.complete) countComplete += 1; // get total no of completed
+
+    var editParams = [items.id, 1]; // edit
+
+    var deleteParams = [items.id, 2]; // delete
+    // edit and delete buttons
+
+    var btns = "\n      <button type=\"button\" data-type=\"edit\" onclick=\"renderModal(".concat(editParams, ");\" class=\"btn btn-green btn-edit\">Edit</button>\n      <button type=\"button\" data-type=\"delete\" onclick=\"renderModal(").concat(deleteParams, ");\" class=\"btn btn-red btn-delete\">Delete</button>\n    "); // checkbox statuses and pararms for priority
+
     var priority = items.priority ? ' checked' : '';
     var priorityText = items.priority ? ' Yes' : ' No';
+    var priorityParams = [items.id, 1]; // checkbox statuses and pararms for complete
+
     var complete = items.complete ? ' checked' : '';
     var completeText = items.complete ? ' Yes' : ' No';
-    rows += "\n      <tr>\n        <td>".concat(items.name, "</td>\n        <td>\n          <label>\n            <input type=\"checkbox\" ").concat(priority, " class=\"custom-control-input\">").concat(priorityText, "\n          </label>\n        </td>\n        <td>\n          <label>\n            <input type=\"checkbox\" ").concat(complete, " class=\"custom-control-input\">").concat(completeText, "\n          </label>\n        </td>\n        <td>").concat(btns, "</td>\n      </tr>\n    ");
-  });
-  var addBtn = "\n    <div class=\"text-center\">\n      <button type=\"button\" id=\"btn-launch-modal\" class=\"btn btn-green\">Add New Todo</button>\n    </div>\n  ";
-  var table = "\n    ".concat(addBtn, "\n    <table class=\"table\">\n      <thead>\n        <tr>\n          <th>Name</th>\n          <th>Priority</th>\n          <th>Complete</th>\n          <th>Actions</th>\n        </tr>\n      </thead>\n      <tbody>\n        ").concat(rows, "\n      </tbody>\n    </table>\n  ");
+    var completeParams = [items.id, 2]; // generate table rows
+
+    rows += "\n      <tr>\n        <td>".concat(items.name, "</td>\n        <td>\n          <label>\n            <input type=\"checkbox\"").concat(priority, " onchange=\"toggleHandler(").concat(priorityParams, ");\" class=\"custom-control-input\">").concat(priorityText, "\n          </label>\n        </td>\n        <td>\n          <label>\n            <input type=\"checkbox\"").concat(complete, " onchange=\"toggleHandler(").concat(completeParams, ");\" class=\"custom-control-input\">").concat(completeText, "\n          </label>\n        </td>\n        <td>").concat(btns, "</td>\n      </tr>\n    ");
+  }); // create button
+
+  var addBtn = "\n      <button type=\"button\" id=\"btn-launch-modal\" class=\"btn btn-green\">Add New Todo</button>\n  ";
+  var sortPriorityParams = [1];
+  var sortNameParams = [2];
+  var sortPriority = active.sortPriority ? ' checked' : '';
+  var sortName = active.sortName ? ' checked' : ''; // sort UI
+
+  var sortUI = "\n    <label>\n      <input type=\"checkbox\"".concat(sortName, " onchange=\"sortHandler(").concat(sortNameParams, ");\" class=\"custom-control-input\"> Sort by Name\n    </label>\n    <label>\n      <input type=\"checkbox\"").concat(sortPriority, " onchange=\"sortHandler(").concat(sortPriorityParams, ");\" class=\"custom-control-input\"> Sort by Priority\n    </label>\n  "); // assemble the table
+
+  var table = "\n   <div class=\"ui-container\">".concat(sortUI, " ").concat(addBtn, "</div>\n    <table class=\"table\">\n      <thead>\n        <tr>\n          <th>Name</th>\n          <th>Priority</th>\n          <th>Complete</th>\n          <th>Edit</th>\n        </tr>\n      </thead>\n      <tbody>\n        ").concat(rows, "\n      </tbody>\n    </table>\n    <div class=\"text-center\" style=\"margin-top: 1rem\">").concat(countComplete, " of ").concat(countTotal, " Todos Complete.</div>\n  ");
   return table;
 }
 
@@ -55,13 +77,15 @@ var data = [{
 }, {
   id: 3,
   name: 'Walk the dog',
-  priority: false,
+  priority: true,
   complete: false,
-  publish: false
+  publish: true
 }];
 var active = {
   id: '',
-  action: ''
+  action: '',
+  sortPriority: false,
+  sortName: false
 };
 /* ########################
 ######### METHODS #########
@@ -71,6 +95,8 @@ var closeModal = function closeModal() {
   // Remove modal from DOM
   var modal = document.getElementById('modal');
   modal.remove();
+  active.id = '';
+  active.action = '';
 };
 
 var renderModal = function renderModal() {
@@ -99,9 +125,10 @@ var renderModal = function renderModal() {
   var newModal = modal.renderHTML();
   var mount = document.getElementById('modal-mount-point'); // Add modal to the DOM
 
-  mount.innerHTML = newModal; // Automatically add focus to the input with the modal
+  mount.innerHTML = newModal;
 
   if (!params[1] || params[1] === 1) {
+    // Automatically add focus to the input in the modal
     var input = document.getElementById('input-add-todo');
     input.focus();
   } // add lister to save btn
@@ -151,12 +178,42 @@ var saveValue = function saveValue(e) {
   loadApp();
 };
 
+var toggleHandler = function toggleHandler() {
+  if (!(arguments.length <= 1 ? undefined : arguments[1])) return; // params[1] === 1 Priority
+  // params[1] === 2 Complete
+
+  active.id = arguments.length <= 0 ? undefined : arguments[0];
+  active.action = arguments.length <= 1 ? undefined : arguments[1]; // Isolate item to edit
+
+  var dataIsolated = data.filter(function (p) {
+    return p.id === active.id;
+  });
+
+  if (active.action === 1) {
+    dataIsolated[0].priority = !dataIsolated[0].priority;
+  } else {
+    dataIsolated[0].complete = !dataIsolated[0].complete;
+  }
+
+  active.id = '';
+  active.action = '';
+  console.log(data);
+  loadApp();
+};
+
+var sortHandler = function sortHandler() {
+  if (!(arguments.length <= 1 ? undefined : arguments[1])) return;
+  console.log('hello');
+};
+
 var loadApp = function loadApp() {
-  var tableHTML = renderTable(data);
+  var tableHTML = renderTable(data, active);
   var mount = document.getElementById('app-mount-point');
   mount.innerHTML = tableHTML; // Listen for add todo click
 
   document.getElementById("btn-launch-modal").addEventListener("click", renderModal);
+  toggleHandler();
+  sortHandler();
 };
 
 document.addEventListener("DOMContentLoaded", loadApp);

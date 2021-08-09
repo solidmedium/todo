@@ -112,13 +112,13 @@ body {
 	}
 
 	&.btn-red {
-		border-color: $red;
-		color: $red;
+		border-color: $pink;
+		color: $pink;
 
 		&:hover,
 		&:focus,
 		&:active {
-			background-color: $red;
+			background-color: $pink;
 		}
 
 		&.close {
@@ -180,4 +180,8 @@ body {
 		// border-bottom: solid 2px $theme-gray;
 
 	}
+}
+.ui-container {
+	display: flex;
+	justify-content: space-between;
 }

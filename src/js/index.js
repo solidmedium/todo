@@ -19,15 +19,17 @@ let data = [
   },  {
     id: 3,
     name: 'Walk the dog',
-    priority: false,
+    priority: true,
     complete: false,
-    publish: false
+    publish: true
   } 
 ];
 
 let active = {
   id: '',
-  action: ''
+  action: '',
+  sortPriority: false,
+  sortName: false
 }
 
 /* ########################
@@ -38,6 +40,9 @@ const closeModal = () => {
   // Remove modal from DOM
   const modal = document.getElementById('modal');
   modal.remove();
+
+  active.id = '';
+  active.action = '';
 }
 
 const renderModal = (...params) => {
@@ -69,9 +74,8 @@ const renderModal = (...params) => {
   // Add modal to the DOM
   mount.innerHTML = newModal;
 
-  // Automatically add focus to the input with the modal
   if ((!params[1]) || (params[1] === 1)) {
-    
+    // Automatically add focus to the input in the modal
     const input = document.getElementById('input-add-todo');
     input.focus();
 
@@ -128,15 +132,54 @@ const saveValue = (e) => {
   loadApp();
 }
 
+const toggleHandler = (...params) => {
+
+  if (!params[1]) return;
+
+  // params[1] === 1 Priority
+  // params[1] === 2 Complete
+
+  active.id = params[0];
+  active.action = params[1];
+  // Isolate item to edit
+  const dataIsolated = data.filter(p => p.id === active.id);
+
+  if (active.action === 1) {
+    dataIsolated[0].priority = !dataIsolated[0].priority;
+  } else {
+    dataIsolated[0].complete = !dataIsolated[0].complete;
+  }
+
+  active.id = '';
+  active.action = '';
+
+  console.log(data);
+  
+  loadApp();
+}
+
+const sortHandler = (...params) => {
+
+  if (!params[1]) return;
+
+  console.log('hello')
+
+}
+
 const loadApp = () => {
   
-  const tableHTML = renderTable(data);
+  const tableHTML = renderTable(data, active);
   const mount = document.getElementById('app-mount-point');
 
   mount.innerHTML = tableHTML;
 
   // Listen for add todo click
   document.getElementById("btn-launch-modal").addEventListener("click", renderModal);
+      
+  toggleHandler();
+
+  sortHandler();
+
 }
 
 document.addEventListener("DOMContentLoaded", loadApp);
