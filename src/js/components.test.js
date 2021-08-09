@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 const component = require('./components.js');
 
 
@@ -22,7 +26,7 @@ test('Modal Component - Edit', () => {
 
       const params = [1, 1];
 
-      expect(component.editModalTest(...params)).toBe(modalHTML);
+      expect(component.editModalTest(params)).toBe(modalHTML);
 });
 
 test('Render Table', () => {

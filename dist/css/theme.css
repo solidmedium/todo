@@ -24,6 +24,8 @@ body {
     vertical-align: bottom;
     border-bottom: 2px solid #8898AD;
     padding: 1rem; }
+    .table thead th:first-of-type {
+      width: 355px; }
     .table thead th:last-of-type {
       text-align: right; }
   .table tbody tr:hover {
