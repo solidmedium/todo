@@ -7,20 +7,20 @@ let data = [
   {
     id: 1,
     name: 'Take out the trash',
-    priority: 0,
-    complete: 'No',
+    priority: false,
+    complete: false,
     publish: true
   }, {
     id: 2,
     name: 'Bring in the trash',
-    priority: 0,
-    complete: 'No',
+    priority: false,
+    complete: false,
     publish: true
   },  {
     id: 3,
     name: 'Walk the dog',
-    priority: 0,
-    complete: 'No',
+    priority: false,
+    complete: false,
     publish: false
   } 
 ];
@@ -112,8 +112,8 @@ const saveValue = (e) => {
     data.push({
       id: count + 1,
       name: value,
-      priority: 0,
-      complete: 'No',
+      priority: false,
+      complete: false,
       publish: true
     });
   }

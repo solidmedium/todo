@@ -29,7 +29,11 @@ function renderTable(data) {
     var editParams = [items.id, 1];
     var deleteParams = [items.id, 2];
     var btns = "\n      <button type=\"button\" data-type=\"edit\" onclick=\"renderModal(".concat(editParams, ");\" class=\"btn btn-blue btn-edit\">Edit</button>\n      <button type=\"button\" data-type=\"delete\" onclick=\"renderModal(").concat(deleteParams, ");\" class=\"btn btn-red btn-delete\">Delete</button>\n    ");
-    rows += "\n      <tr>\n        <td>".concat(items.name, "</td>\n        <td>").concat(items.priority, "</td>\n        <td>").concat(items.complete, "</td>\n        <td>").concat(btns, "</td>\n      </tr>\n    ");
+    var priority = items.priority ? ' checked' : '';
+    var priorityText = items.priority ? ' Yes' : ' No';
+    var complete = items.complete ? ' checked' : '';
+    var completeText = items.complete ? ' Yes' : ' No';
+    rows += "\n      <tr>\n        <td>".concat(items.name, "</td>\n        <td>\n          <label>\n            <input type=\"checkbox\" ").concat(priority, " class=\"custom-control-input\">").concat(priorityText, "\n          </label>\n        </td>\n        <td>\n          <label>\n            <input type=\"checkbox\" ").concat(complete, " class=\"custom-control-input\">").concat(completeText, "\n          </label>\n        </td>\n        <td>").concat(btns, "</td>\n      </tr>\n    ");
   });
   var addBtn = "\n    <div class=\"text-center\">\n      <button type=\"button\" id=\"btn-launch-modal\" class=\"btn btn-green\">Add New Todo</button>\n    </div>\n  ";
   var table = "\n    ".concat(addBtn, "\n    <table class=\"table\">\n      <thead>\n        <tr>\n          <th>Name</th>\n          <th>Priority</th>\n          <th>Complete</th>\n          <th>Actions</th>\n        </tr>\n      </thead>\n      <tbody>\n        ").concat(rows, "\n      </tbody>\n    </table>\n  ");
@@ -39,20 +43,20 @@ function renderTable(data) {
 var data = [{
   id: 1,
   name: 'Take out the trash',
-  priority: 0,
-  complete: 'No',
+  priority: false,
+  complete: false,
   publish: true
 }, {
   id: 2,
   name: 'Bring in the trash',
-  priority: 0,
-  complete: 'No',
+  priority: false,
+  complete: false,
   publish: true
 }, {
   id: 3,
   name: 'Walk the dog',
-  priority: 0,
-  complete: 'No',
+  priority: false,
+  complete: false,
   publish: false
 }];
 var active = {
@@ -134,8 +138,8 @@ var saveValue = function saveValue(e) {
     data.push({
       id: count + 1,
       name: value,
-      priority: 0,
-      complete: 'No',
+      priority: false,
+      complete: false,
       publish: true
     });
   }

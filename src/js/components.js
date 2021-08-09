@@ -59,11 +59,24 @@ function renderTable(data) {
       <button type="button" data-type="delete" onclick="renderModal(${deleteParams});" class="btn btn-red btn-delete">Delete</button>
     `;
 
+    const priority = (items.priority) ? ' checked' : '';
+    const priorityText = (items.priority) ? ' Yes' : ' No';
+    const complete = (items.complete) ? ' checked' : '';
+    const completeText = (items.complete) ? ' Yes' : ' No';
+
     rows += `
       <tr>
         <td>${items.name}</td>
-        <td>${items.priority}</td>
-        <td>${items.complete}</td>
+        <td>
+          <label>
+            <input type="checkbox" ${priority} class="custom-control-input">${priorityText}
+          </label>
+        </td>
+        <td>
+          <label>
+            <input type="checkbox" ${complete} class="custom-control-input">${completeText}
+          </label>
+        </td>
         <td>${btns}</td>
       </tr>
     `;
