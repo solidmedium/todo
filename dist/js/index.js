@@ -5,7 +5,7 @@ var modalComponent = {
   title: 'Add New Todo',
   value: '',
   renderHTML: function renderHTML() {
-    var html = "\n      <div class=\"modal\" id=\"modal\">\n        <div class=\"modal-header\">\n          <h4 class=\"modal-title\"></h4>\n          <button type=\"button\" class=\"close btn btn-red\" id=\"btn-close-modal\">\n            <span aria-hidden=\"true\">X</span>\n          </button>\n        </div>\n        <div class=\"modal-body\">\n            <div>\n              <input type=\"text\" placeholder=\"".concat(this.title, "\" id=\"input-add-todo\" class=\"form-control\" id=\"\" value=\"").concat(this.value, "\">\n            </div>\n            <div>\n            <button type=\"button\" id=\"btn-save-todo\" class=\"btn btn-green\">Submit</button>\n            </div>\n        </div>\n      </div>\n      \n    ");
+    var html = "\n      <div class=\"modal\" id=\"modal\">\n        <div class=\"modal-header\">\n          <h4 class=\"modal-title\"></h4>\n          <button type=\"button\" class=\"close btn btn-red\" id=\"btn-close-modal\">\n            <span aria-hidden=\"true\">X</span>\n          </button>\n        </div>\n        <div class=\"modal-body\">\n            <div>\n              <input type=\"text\" placeholder=\"".concat(this.title, "\" id=\"input-add-todo\" class=\"form-control\" id=\"\" value=\"").concat(this.value, "\" required>\n            </div>\n            <div>\n            <button type=\"button\" id=\"btn-save-todo\" class=\"btn btn-green\">Submit</button>\n            </div>\n        </div>\n      </div>\n      \n    ");
     return html.trim();
   }
 };
@@ -44,9 +44,6 @@ var data = [{
   complete: 'No',
   publish: false
 }];
-var todo = {
-  value: []
-};
 /* ########################
 ######### METHODS #########
 ######################### */
@@ -69,14 +66,21 @@ var renderModal = function renderModal() {
   var input = document.getElementById('input-add-todo');
   input.focus(); // Add listener to close modal button
 
-  document.getElementById("btn-close-modal").addEventListener("click", closeModal); // add listener to input
+  document.getElementById("btn-close-modal").addEventListener("click", closeModal); // add lister to save btn
 
-  document.getElementById("input-add-todo").addEventListener("keyup", recordValue);
+  document.getElementById("btn-save-todo").addEventListener("click", saveValue);
 };
 
-var recordValue = function recordValue(e) {
-  todo.value.push(e);
-  console.log(todo.value);
+var saveValue = function saveValue(e) {
+  var value = document.getElementById("input-add-todo").value;
+  data.push({
+    id: '',
+    name: value,
+    priority: 0,
+    complete: 'No',
+    publish: true
+  });
+  console.log(data);
 };
 
 var loadApp = function loadApp() {

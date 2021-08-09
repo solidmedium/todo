@@ -15,7 +15,7 @@ let modalComponent = {
         </div>
         <div class="modal-body">
             <div>
-              <input type="text" placeholder="${this.title}" id="input-add-todo" class="form-control" id="" value="${this.value}">
+              <input type="text" placeholder="${this.title}" id="input-add-todo" class="form-control" id="" value="${this.value}" required>
             </div>
             <div>
             <button type="button" id="btn-save-todo" class="btn btn-green">Submit</button>

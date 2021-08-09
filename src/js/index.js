@@ -25,10 +25,6 @@ let data = [
   } 
 ];
 
-const todo = {
-  value: []
-};
-
 /* ########################
 ######### METHODS #########
 ######################### */
@@ -57,16 +53,24 @@ const renderModal = () => {
   // Add listener to close modal button
   document.getElementById("btn-close-modal").addEventListener("click", closeModal);
 
-  // add listener to input
-  document.getElementById("input-add-todo").addEventListener("keyup", recordValue);
+  // add lister to save btn
+  document.getElementById("btn-save-todo").addEventListener("click", saveValue);
 
 }
 
-const recordValue = (e) => {
+const saveValue = (e) => {
  
-  todo.value.push(e);
+  const value = document.getElementById("input-add-todo").value;
 
-  console.log(todo.value);
+  data.push({
+    id: '',
+    name: value,
+    priority: 0,
+    complete: 'No',
+    publish: true
+  });
+
+  console.log(data);
 }
 
 const loadApp = () => {
