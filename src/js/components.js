@@ -6,6 +6,7 @@ let modalComponent = {
   renderHTML() {
 
     let form = '';
+    // Switch UI out if delete set to true
     if (this.delete) {
       form = `
         <div class="input-container">
@@ -17,7 +18,7 @@ let modalComponent = {
     } else {
       form = `
         <div class="input-container">
-          <input type="text" placeholder="${this.title}" id="input-add-todo" class="form-control" id="" value="${this.value}">
+          <input type="text" placeholder="${this.title}" id="input-add-todo" class="form-control" value="${this.value}">
           <button type="button" id="btn-save-todo" class="btn btn-green">GO</button>
         </div>
       `;
@@ -41,12 +42,18 @@ let modalComponent = {
   }
 }
 
+function editModalTest() {
+  const modal = Object.create(modalComponent);
+  modal.title = 'Add New Todo';
+  modal.value = 'Take out the trash';
+  return modal.renderHTML();
+
+}
+
 function renderTable(data, active) {
 
   // Remove unpublished/deleted items from the array
   const dataIsolated = data.filter(p => p.publish);
-
-  console.log(dataIsolated);
 
   let rows = [];
   let countTotal = 0;
@@ -135,11 +142,12 @@ function renderTable(data, active) {
     <div class="text-center" style="margin-top: 1rem">${countComplete} of ${countTotal} Todos Complete.</div>
   `;
 
-  return table;
+  return table.trim();
 }
 
 
 export {
   modalComponent,
+  editModalTest,
   renderTable
 }

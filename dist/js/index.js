@@ -5,12 +5,12 @@ var modalComponent = {
   value: '',
   "delete": false,
   renderHTML: function renderHTML() {
-    var form = '';
+    var form = ''; // Switch UI out if delete set to true
 
     if (this["delete"]) {
       form = "\n        <div class=\"input-container\">\n          <h2>Your are about to delete this item</h2>\n          <input type=\"text\" disabled id=\"input-add-todo\" class=\"form-control\" id=\"\" value=\"".concat(this.value, "\">\n          <button type=\"button\" id=\"btn-save-todo\" class=\"btn btn-red\">Confirm Delete</button>\n        </div>\n      ");
     } else {
-      form = "\n        <div class=\"input-container\">\n          <input type=\"text\" placeholder=\"".concat(this.title, "\" id=\"input-add-todo\" class=\"form-control\" id=\"\" value=\"").concat(this.value, "\">\n          <button type=\"button\" id=\"btn-save-todo\" class=\"btn btn-green\">GO</button>\n        </div>\n      ");
+      form = "\n        <div class=\"input-container\">\n          <input type=\"text\" placeholder=\"".concat(this.title, "\" id=\"input-add-todo\" class=\"form-control\" value=\"").concat(this.value, "\">\n          <button type=\"button\" id=\"btn-save-todo\" class=\"btn btn-green\">GO</button>\n        </div>\n      ");
     }
 
     var html = "\n      <div class=\"modal\" id=\"modal\">\n        <div class=\"modal-header\">\n          <h4 class=\"modal-title\"></h4>\n          <button type=\"button\" class=\"close btn btn-red\" id=\"btn-close-modal\">\n            <span aria-hidden=\"true\">X</span>\n          </button>\n        </div>\n        <div class=\"modal-body\">\n           ".concat(form, "\n        </div>\n      </div>\n    ");
@@ -23,7 +23,6 @@ function renderTable(data, active) {
   var dataIsolated = data.filter(function (p) {
     return p.publish;
   });
-  console.log(dataIsolated);
   var rows = [];
   var countTotal = 0;
   var countComplete = 0;
@@ -59,7 +58,7 @@ function renderTable(data, active) {
   var sortUI = "\n    <div>\n    <label style=\"margin-right: 1rem\">\n      <input type=\"checkbox\"".concat(sortName, " id=\"checkbox-sort-name\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortNameParams, ");\" class=\"custom-control-input\"> Sort by Name\n    </label>\n    <label>\n      <input type=\"checkbox\"").concat(sortPriority, " id=\"checkbox-sort-priority\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortPriorityParams, ");\" class=\"custom-control-input\"> Sort by Priority\n    </label>\n    </div>\n  "); // assemble the table
 
   var table = "\n   <div class=\"ui-container\">".concat(sortUI, " ").concat(addBtn, "</div>\n    <table class=\"table\">\n      <thead>\n        <tr>\n          <th>Name</th>\n          <th>Priority</th>\n          <th>Complete</th>\n          <th>Edit</th>\n        </tr>\n      </thead>\n      <tbody>\n        ").concat(rows, "\n      </tbody>\n    </table>\n    <div class=\"text-center\" style=\"margin-top: 1rem\">").concat(countComplete, " of ").concat(countTotal, " Todos Complete.</div>\n  ");
-  return table;
+  return table.trim();
 }
 
 var data = [{
