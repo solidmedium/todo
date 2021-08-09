@@ -51,7 +51,11 @@ let active = {
 const closeModal = () => {
   // Remove modal from DOM
   const modal = document.getElementById('modal');
-  modal.remove();
+  modal.classList.remove("active");
+
+  setTimeout(() => {
+    modal.remove();
+  }, 500);
 
   active.id = '';
   active.action = '';
@@ -86,18 +90,26 @@ const renderModal = (...params) => {
   // Add modal to the DOM
   mount.innerHTML = newModal;
 
+
   if ((!params[1]) || (params[1] === 1)) {
     // Automatically add focus to the input in the modal
     const input = document.getElementById('input-add-todo');
     input.focus();
 
   }
-  
+
   // add lister to save btn
   document.getElementById("btn-save-todo").addEventListener("click", saveValue);
 
   // Add listener to close modal button
   document.getElementById("btn-close-modal").addEventListener("click", closeModal);
+  
+  setTimeout(() => {
+  
+    const element = document.getElementById("modal");
+    element.classList.add("active");
+
+  }, 100);
 }
 
 const saveValue = (e) => {

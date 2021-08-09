@@ -105,7 +105,10 @@ var active = {
 var closeModal = function closeModal() {
   // Remove modal from DOM
   var modal = document.getElementById('modal');
-  modal.remove();
+  modal.classList.remove("active");
+  setTimeout(function () {
+    modal.remove();
+  }, 500);
   active.id = '';
   active.action = '';
 };
@@ -148,6 +151,10 @@ var renderModal = function renderModal() {
   document.getElementById("btn-save-todo").addEventListener("click", saveValue); // Add listener to close modal button
 
   document.getElementById("btn-close-modal").addEventListener("click", closeModal);
+  setTimeout(function () {
+    var element = document.getElementById("modal");
+    element.classList.add("active");
+  }, 100);
 };
 
 var saveValue = function saveValue(e) {
