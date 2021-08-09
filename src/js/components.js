@@ -1,9 +1,27 @@
 
 let modalComponent = {
-  id: null,
   title: 'Add New Todo',
   value: '',
+  delete: false,
   renderHTML() {
+
+    let form = '';
+    if (this.delete) {
+      form = `
+        <div class="input-container">
+          <h2>Your are about to delete this item</h2>
+          <input type="text" disabled id="input-add-todo" class="form-control" id="" value="${this.value}">
+          <button type="button" id="btn-save-todo" class="btn btn-red">Confirm Delete</button>
+        </div>
+      `;
+    } else {
+      form = `
+        <div class="input-container">
+          <input type="text" placeholder="${this.title}" id="input-add-todo" class="form-control" id="" value="${this.value}">
+          <button type="button" id="btn-save-todo" class="btn btn-blue">GO</button>
+        </div>
+      `;
+    }
 
     const html = `
       <div class="modal" id="modal">
@@ -14,15 +32,9 @@ let modalComponent = {
           </button>
         </div>
         <div class="modal-body">
-            <div>
-              <input type="text" placeholder="${this.title}" id="input-add-todo" class="form-control" id="" value="${this.value}" required>
-            </div>
-            <div>
-            <button type="button" id="btn-save-todo" class="btn btn-green">Submit</button>
-            </div>
+           ${form}
         </div>
       </div>
-      
     `;
 
     return html.trim();
@@ -34,12 +46,17 @@ function renderTable(data) {
   // Remove unpublished/deleted items from the array
   const dataIsolated = data.filter(p => p.publish);
 
+  console.log(dataIsolated);
+
   let rows = [];
   dataIsolated.map(items => {
+
+    const editParams = [items.id, 1];
+    const deleteParams = [items.id, 2];
     
     const btns = `
-      <button type="button" class="btn btn-blue btn-complete">Edit</button>
-      <button type="button" class="btn btn-red btn-delete">Delete</button>
+      <button type="button" data-type="edit" onclick="renderModal(${editParams});" class="btn btn-blue btn-edit">Edit</button>
+      <button type="button" data-type="delete" onclick="renderModal(${deleteParams});" class="btn btn-red btn-delete">Delete</button>
     `;
 
     rows += `
