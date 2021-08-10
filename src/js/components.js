@@ -86,13 +86,15 @@ function renderTable(data, active) {
       <tr>
         <td>${items.name}</td>
         <td>
-          <label>
+          <label class="switch">
             <input type="checkbox"${priority} onchange="toggleHandler(${priorityParams});" class="custom-control-input">${priorityText}
+            <span class="slider round"></span>
           </label>
         </td>
         <td>
-          <label>
+          <label class="switch">
             <input type="checkbox"${complete} onchange="toggleHandler(${completeParams});" class="custom-control-input">${completeText}
+            <span class="slider round"></span>
           </label>
         </td>
         <td>${btns}</td>

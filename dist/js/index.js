@@ -46,7 +46,7 @@ function renderTable(data, active) {
     var completeText = items.complete ? ' Yes' : ' No';
     var completeParams = [items.id, 2]; // generate table rows
 
-    rows += "\n      <tr>\n        <td>".concat(items.name, "</td>\n        <td>\n          <label>\n            <input type=\"checkbox\"").concat(priority, " onchange=\"toggleHandler(").concat(priorityParams, ");\" class=\"custom-control-input\">").concat(priorityText, "\n          </label>\n        </td>\n        <td>\n          <label>\n            <input type=\"checkbox\"").concat(complete, " onchange=\"toggleHandler(").concat(completeParams, ");\" class=\"custom-control-input\">").concat(completeText, "\n          </label>\n        </td>\n        <td>").concat(btns, "</td>\n      </tr>\n    ");
+    rows += "\n      <tr>\n        <td>".concat(items.name, "</td>\n        <td>\n          <label class=\"switch\">\n            <input type=\"checkbox\"").concat(priority, " onchange=\"toggleHandler(").concat(priorityParams, ");\" class=\"custom-control-input\">").concat(priorityText, "\n            <span class=\"slider round\"></span>\n          </label>\n        </td>\n        <td>\n          <label class=\"switch\">\n            <input type=\"checkbox\"").concat(complete, " onchange=\"toggleHandler(").concat(completeParams, ");\" class=\"custom-control-input\">").concat(completeText, "\n            <span class=\"slider round\"></span>\n          </label>\n        </td>\n        <td>").concat(btns, "</td>\n      </tr>\n    ");
   }); // create button
 
   var addBtn = "\n      <button type=\"button\" id=\"btn-launch-modal\" class=\"btn btn-green\">Add New Todo</button>\n  ";

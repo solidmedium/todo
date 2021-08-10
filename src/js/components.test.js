@@ -38,31 +38,7 @@ test('Render Table', () => {
 	    priority: 0,
 	    complete: 0,
 	    publish: true
-	  }, {
-	    id: 2,
-	    name: 'Bring in the trash',
-	    priority: 0,
-	    complete: 0,
-	    publish: true
-	  },  {
-	    id: 3,
-	    name: 'Walk the dog',
-	    priority: 1,
-	    complete: 0,
-	    publish: true
-	  },  {
-	    id: 4,
-	    name: 'Get the job',
-	    priority: 0,
-	    complete: 0,
-	    publish: true
-	  },  {
-	    id: 5,
-	    name: 'zalk the cat',
-	    priority: 1,
-	    complete: 0,
-	    publish: true
-	  } 
+	  }
 	];
 
 	let active = {
