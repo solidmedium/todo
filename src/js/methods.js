@@ -10,7 +10,7 @@ let data = [
     priority: 1,
     complete: 1,
     publish: true
-  },  {
+  }, {
     id: 2,
     name: 'Explain to 2 year old that not everything can be solved through kicking',
     priority: 0,
@@ -241,7 +241,7 @@ const sortHandler = (...params) => {
   console.log(active);
 
   // return true if running tests
-  if (params[1]) return true;
+  if (params[1]) return data[1];
 
   loadApp();
 

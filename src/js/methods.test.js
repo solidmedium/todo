@@ -13,9 +13,11 @@ test('Toggle handler', () => {
 
 test('Sort handler', () => {
 
+	const result = {"id":3,"name":"Complete coding challenge","priority":1,"complete":1,"publish":true};
+
 	const params = [1, 2];
 
-	expect(methods.sortHandler(...params)).toBe(true);
+	expect(JSON.stringify(methods.sortHandler(...params))).toBe(JSON.stringify(result));
 });
 
 test('Render Modal', () => {

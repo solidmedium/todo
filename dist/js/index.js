@@ -285,7 +285,7 @@ var sortHandler = function sortHandler() {
 
   console.log(active); // return true if running tests
 
-  if (arguments.length <= 1 ? undefined : arguments[1]) return true;
+  if (arguments.length <= 1 ? undefined : arguments[1]) return data[1];
   loadApp();
 };
 
