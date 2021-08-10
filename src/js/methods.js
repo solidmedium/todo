@@ -24,7 +24,7 @@ let data = [
     publish: true
   }, {
     id: 4,
-    name: 'Invesigate advanced cross stitch methods',
+    name: 'Tell 5 year old that saying \'Come at me bro!\' does not absolve you of anything',
     priority: 0,
     complete: 0,
     publish: true
