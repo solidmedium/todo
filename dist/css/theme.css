@@ -29,7 +29,7 @@ body {
     .table thead th:last-of-type {
       text-align: right; }
   .table tbody tr:hover {
-    background-color: #e3ecf6; }
+    background-color: #F6F9FC; }
   .table tbody td {
     vertical-align: middle;
     border-bottom: 1px solid #8898AD;

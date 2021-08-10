@@ -67,7 +67,7 @@ body {
 
 		tr {
 			 &:hover {
-		    	background-color: darken($theme-gray-lighter, 5%);
+		    	background-color: $theme-gray-lighter;
 		    }
 		}
 
