@@ -105,7 +105,8 @@ body {
 .input-container {
   border: solid 1px #8898AD;
   border-radius: 20px;
-  padding: 10px 20px; }
+  padding: 10px 20px;
+  transform: translateY(-35px); }
 
 .form-control {
   border: 0;
