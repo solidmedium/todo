@@ -7,8 +7,8 @@ const methods = require('./methods.js');
 test('Toggle handler', () => {
 
 	const params = [1, 2, 3];
-
-	expect(methods.toggleHandler(...params)).toBe(true);
+	
+	expect(methods.toggleHandler(...params)).toBe(1);
 });
 
 test('Sort handler', () => {

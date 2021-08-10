@@ -33,12 +33,12 @@ test('Render Table', () => {
 
 	let data = [
 	  {
-	    id: 1,
-	    name: 'Take out the trash',
-	    priority: 0,
-	    complete: 0,
-	    publish: true
-	  }
+      id: 1,
+      name: 'Apply for position @ Rocket',
+      priority: 1,
+      complete: 1,
+      publish: true
+    }
 	];
 
 	let active = {
@@ -72,15 +72,17 @@ test('Render Table', () => {
       <tbody>
         
       <tr>
-        <td>Take out the trash</td>
+        <td>Apply for position @ Rocket</td>
         <td>
-          <label>
-            <input type="checkbox" onchange="toggleHandler(1,1);" class="custom-control-input"> No
+          <label class="switch">
+            <input type="checkbox" checked onchange="toggleHandler(1,1);" class="custom-control-input"> Yes
+            <span class="slider round"></span>
           </label>
         </td>
         <td>
-          <label>
-            <input type="checkbox" onchange="toggleHandler(1,2);" class="custom-control-input"> No
+          <label class="switch">
+            <input type="checkbox" checked onchange="toggleHandler(1,2);" class="custom-control-input"> Yes
+            <span class="slider round"></span>
           </label>
         </td>
         <td>
@@ -89,81 +91,9 @@ test('Render Table', () => {
     </td>
       </tr>
     
-      <tr>
-        <td>Bring in the trash</td>
-        <td>
-          <label>
-            <input type="checkbox" onchange="toggleHandler(2,1);" class="custom-control-input"> No
-          </label>
-        </td>
-        <td>
-          <label>
-            <input type="checkbox" onchange="toggleHandler(2,2);" class="custom-control-input"> No
-          </label>
-        </td>
-        <td>
-      <button type="button" data-type="edit" onclick="renderModal(2,1);" class="btn btn-green btn-edit">Edit</button>
-      <button type="button" data-type="delete" onclick="renderModal(2,2);" class="btn btn-red btn-delete">Delete</button>
-    </td>
-      </tr>
-    
-      <tr>
-        <td>Walk the dog</td>
-        <td>
-          <label>
-            <input type="checkbox" checked onchange="toggleHandler(3,1);" class="custom-control-input"> Yes
-          </label>
-        </td>
-        <td>
-          <label>
-            <input type="checkbox" onchange="toggleHandler(3,2);" class="custom-control-input"> No
-          </label>
-        </td>
-        <td>
-      <button type="button" data-type="edit" onclick="renderModal(3,1);" class="btn btn-green btn-edit">Edit</button>
-      <button type="button" data-type="delete" onclick="renderModal(3,2);" class="btn btn-red btn-delete">Delete</button>
-    </td>
-      </tr>
-    
-      <tr>
-        <td>Get the job</td>
-        <td>
-          <label>
-            <input type="checkbox" onchange="toggleHandler(4,1);" class="custom-control-input"> No
-          </label>
-        </td>
-        <td>
-          <label>
-            <input type="checkbox" onchange="toggleHandler(4,2);" class="custom-control-input"> No
-          </label>
-        </td>
-        <td>
-      <button type="button" data-type="edit" onclick="renderModal(4,1);" class="btn btn-green btn-edit">Edit</button>
-      <button type="button" data-type="delete" onclick="renderModal(4,2);" class="btn btn-red btn-delete">Delete</button>
-    </td>
-      </tr>
-    
-      <tr>
-        <td>zalk the cat</td>
-        <td>
-          <label>
-            <input type="checkbox" checked onchange="toggleHandler(5,1);" class="custom-control-input"> Yes
-          </label>
-        </td>
-        <td>
-          <label>
-            <input type="checkbox" onchange="toggleHandler(5,2);" class="custom-control-input"> No
-          </label>
-        </td>
-        <td>
-      <button type="button" data-type="edit" onclick="renderModal(5,1);" class="btn btn-green btn-edit">Edit</button>
-      <button type="button" data-type="delete" onclick="renderModal(5,2);" class="btn btn-red btn-delete">Delete</button>
-    </td>
-      </tr>
-    
       </tbody>
     </table>
-    <div class="text-center" style="margin-top: 1rem">0 of 5 Todos Complete.</div>`;
+    <div class="text-center" style="margin-top: 1rem">1 of 1 Todos Complete.</div>`;
 
 	expect(component.renderTable(data, active)).toBe(table);
 });
