@@ -86,7 +86,8 @@ body {
   flex-flow: column;
   transition: all ease-out .2s;
   opacity: 0;
-  transform: scale(0.8) translateY(-10%); }
+  transform: scale(0.8) translateY(-10%);
+  z-index: 2; }
   .modal.active {
     opacity: 1;
     transform: scale(1) translateY(0); }
@@ -104,8 +105,8 @@ body {
 
 .input-container {
   border: solid 1px #8898AD;
-  border-radius: 20px;
-  padding: 10px 20px;
+  border-radius: 40px;
+  padding: 15px 30px;
   transform: translateY(-35px); }
 
 .form-control {
@@ -157,10 +158,10 @@ body {
   transition: .4s; }
 
 input:checked + .slider {
-  background-color: #198754; }
+  background-color: #20c997; }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #198754; }
+  box-shadow: 0 0 1px #20c997; }
 
 input:checked + .slider:before {
   -webkit-transform: translateX(16px);
