@@ -32,7 +32,7 @@ let data = [
     id: 5,
     name: 'Start telling people about the sweet NFT\'s you have',
     priority: 0,
-    complete: 1,
+    complete: 0,
     publish: true
   }, {
     id: 6,
@@ -202,10 +202,8 @@ const toggleHandler = (...params) => {
   active.id = '';
   active.action = '';
 
-  console.log(data, params[2]);
-  
   // return true if running test
-  if (params[2]) return true;
+  if (params[2]) return dataIsolated[0].priority;
 
   loadApp();
 
@@ -237,8 +235,6 @@ const sortHandler = (...params) => {
       data.sort((a,b) => (b.name > a.name) ? 1 : ((a.name > b.name) ? -1 : 0));
     }
   }
-
-  console.log(active);
 
   // return true if running tests
   if (params[1]) return data[1];

@@ -8,7 +8,7 @@ var modalComponent = {
     var form = ''; // Switch UI out if delete set to true
 
     if (this["delete"]) {
-      form = "\n        <div class=\"input-container\">\n          <h2>Your are about to delete this item</h2>\n          <input type=\"text\" disabled id=\"input-add-todo\" class=\"form-control\" id=\"\" value=\"".concat(this.value, "\">\n          <button type=\"button\" id=\"btn-save-todo\" class=\"btn btn-red\">Confirm Delete</button>\n        </div>\n      ");
+      form = "\n        <div class=\"input-container\">\n          <h3>Your are about to delete this item</h3>\n          <input type=\"text\" disabled id=\"input-add-todo\" class=\"form-control\" id=\"\" value=\"".concat(this.value, "\">\n          <button type=\"button\" id=\"btn-save-todo\" class=\"btn btn-red\">Confirm Delete</button>\n        </div>\n      ");
     } else {
       form = "\n        <div class=\"input-container\">\n          <input type=\"text\" placeholder=\"".concat(this.title, "\" id=\"input-add-todo\" class=\"form-control\" value=\"").concat(this.value, "\">\n          <button type=\"button\" id=\"btn-save-todo\" class=\"btn btn-green\">GO</button>\n        </div>\n      ");
     }
@@ -55,7 +55,7 @@ function renderTable(data, active) {
   var sortPriority = active.sortPriority ? ' checked' : '';
   var sortName = active.sortName ? ' checked' : ''; // sort UI
 
-  var sortUI = "\n    <div>\n    <label style=\"margin-right: 1rem\">\n      <input type=\"checkbox\"".concat(sortName, " id=\"checkbox-sort-name\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortNameParams, ");\" class=\"custom-control-input\"> Sort by Name\n    </label>\n    <label>\n      <input type=\"checkbox\"").concat(sortPriority, " id=\"checkbox-sort-priority\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortPriorityParams, ");\" class=\"custom-control-input\"> Sort by Priority\n    </label>\n    </div>\n  "); // assemble the table
+  var sortUI = "\n    <div>\n    <h3>Sort by:</h3>\n    <label class=\"switch name\" style=\"margin-right: .5rem\">\n      <input type=\"checkbox\"".concat(sortName, " id=\"checkbox-sort-name\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortNameParams, ");\" class=\"custom-control-input\">\n      <span class=\"slider round\"></span>\n    </label>\n    <label style=\"margin-right: 1rem\">Name</label>\n    <label class=\"switch priority\" style=\"margin-right: .5rem\">\n      <input type=\"checkbox\"").concat(sortPriority, " id=\"checkbox-sort-priority\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortPriorityParams, ");\" class=\"custom-control-input\"> \n      <span class=\"slider round\"></span>\n    </label>\n    <label>Priority</label>\n    </div>\n  "); // assemble the table
 
   var table = "\n   <div class=\"ui-container\">".concat(sortUI, " ").concat(addBtn, "</div>\n    <table class=\"table\">\n      <thead>\n        <tr>\n          <th>Name</th>\n          <th>Priority</th>\n          <th>Complete</th>\n          <th>Edit</th>\n        </tr>\n      </thead>\n      <tbody>\n        ").concat(rows, "\n      </tbody>\n    </table>\n    <div class=\"text-center\" style=\"margin-top: 1rem\">").concat(countComplete, " of ").concat(countTotal, " Todos Complete.</div>\n  ");
   return table.trim();
@@ -89,7 +89,7 @@ var data = [{
   id: 5,
   name: 'Start telling people about the sweet NFT\'s you have',
   priority: 0,
-  complete: 1,
+  complete: 0,
   publish: true
 }, {
   id: 6,
@@ -245,10 +245,9 @@ var toggleHandler = function toggleHandler() {
   }
 
   active.id = '';
-  active.action = '';
-  console.log(data, arguments.length <= 2 ? undefined : arguments[2]); // return true if running test
+  active.action = ''; // return true if running test
 
-  if (arguments.length <= 2 ? undefined : arguments[2]) return true;
+  if (arguments.length <= 2 ? undefined : arguments[2]) return dataIsolated[0].priority;
   loadApp();
 };
 
@@ -281,9 +280,8 @@ var sortHandler = function sortHandler() {
         return b.name > a.name ? 1 : a.name > b.name ? -1 : 0;
       });
     }
-  }
+  } // return true if running tests
 
-  console.log(active); // return true if running tests
 
   if (arguments.length <= 1 ? undefined : arguments[1]) return data[1];
   loadApp();

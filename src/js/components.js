@@ -10,7 +10,7 @@ let modalComponent = {
     if (this.delete) {
       form = `
         <div class="input-container">
-          <h2>Your are about to delete this item</h2>
+          <h3>Your are about to delete this item</h3>
           <input type="text" disabled id="input-add-todo" class="form-control" id="" value="${this.value}">
           <button type="button" id="btn-save-todo" class="btn btn-red">Confirm Delete</button>
         </div>
@@ -116,12 +116,17 @@ function renderTable(data, active) {
   // sort UI
   const sortUI = `
     <div>
-    <label style="margin-right: 1rem">
-      <input type="checkbox"${sortName} id="checkbox-sort-name" name="checkbox-sort" onchange="sortHandler(${sortNameParams});" class="custom-control-input"> Sort by Name
+    <h3>Sort by:</h3>
+    <label class="switch name" style="margin-right: .5rem">
+      <input type="checkbox"${sortName} id="checkbox-sort-name" name="checkbox-sort" onchange="sortHandler(${sortNameParams});" class="custom-control-input">
+      <span class="slider round"></span>
     </label>
-    <label>
-      <input type="checkbox"${sortPriority} id="checkbox-sort-priority" name="checkbox-sort" onchange="sortHandler(${sortPriorityParams});" class="custom-control-input"> Sort by Priority
+    <label style="margin-right: 1rem">Name</label>
+    <label class="switch priority" style="margin-right: .5rem">
+      <input type="checkbox"${sortPriority} id="checkbox-sort-priority" name="checkbox-sort" onchange="sortHandler(${sortPriorityParams});" class="custom-control-input"> 
+      <span class="slider round"></span>
     </label>
+    <label>Priority</label>
     </div>
   `;
 
