@@ -1,5 +1,17 @@
 'use strict';
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 var modalComponent = {
   title: 'Add New Todo',
   value: '',
@@ -63,7 +75,7 @@ function renderTable(data, active) {
 
 var data = [{
   id: 1,
-  name: 'Apply for position @ Rocket',
+  name: 'Apply for position @ Rocket Lab',
   priority: 1,
   complete: 1,
   publish: true
@@ -93,11 +105,14 @@ var data = [{
   publish: true
 }, {
   id: 6,
-  name: 'Land dream job @ Rocket',
+  name: 'Land dream job @ Rocket Lab',
   priority: 1,
   complete: 0,
   publish: true
-}];
+}]; // set temp arr for data reset 
+
+var tempArr = _toConsumableArray(data);
+
 var active = {
   id: '',
   action: '',
@@ -262,10 +277,6 @@ var sortHandler = function sortHandler() {
       data.sort(function (a, b) {
         return parseFloat(b.priority) - parseFloat(a.priority);
       });
-    } else {
-      data.sort(function (a, b) {
-        return parseFloat(a.priority) - parseFloat(b.priority);
-      });
     }
   } else {
     active.sortName = !active.sortName;
@@ -273,14 +284,15 @@ var sortHandler = function sortHandler() {
     if (active.sortName) {
       // this method is taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
       data.sort(function (a, b) {
-        return a.name > b.name ? 1 : b.name > a.name ? -1 : 0;
-      });
-    } else {
-      data.sort(function (a, b) {
-        return b.name > a.name ? 1 : a.name > b.name ? -1 : 0;
+        return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0;
       });
     }
-  } // return true if running tests
+  } // reset array if both toggles are off
+
+
+  if (!active.sortName && !active.sortPriority) {
+    data = _toConsumableArray(tempArr);
+  } // return second item in array if running tests
 
 
   if (arguments.length <= 1 ? undefined : arguments[1]) return data[1];

@@ -6,7 +6,7 @@ import {
 let data = [
   {
     id: 1,
-    name: 'Apply for position @ Rocket',
+    name: 'Apply for position @ Rocket Lab',
     priority: 1,
     complete: 1,
     publish: true
@@ -36,12 +36,15 @@ let data = [
     publish: true
   }, {
     id: 6,
-    name: 'Land dream job @ Rocket',
+    name: 'Land dream job @ Rocket Lab',
     priority: 1,
     complete: 0,
     publish: true
   } 
 ];
+
+// set temp arr for data reset 
+const tempArr = [...data];
 
 let active = {
   id: '',
@@ -220,8 +223,6 @@ const sortHandler = (...params) => {
     if (active.sortPriority) {
       // this method is taken from https://stackoverflow.com/questions/979256/sorting-an-array-of-objects-by-property-values
       data.sort((a, b) => parseFloat(b.priority) - parseFloat(a.priority));
-    } else {
-      data.sort((a, b) => parseFloat(a.priority) - parseFloat(b.priority));
     }
 
   } else {
@@ -230,13 +231,18 @@ const sortHandler = (...params) => {
 
     if (active.sortName) {
       // this method is taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
-      data.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
-    } else {
-      data.sort((a,b) => (b.name > a.name) ? 1 : ((a.name > b.name) ? -1 : 0));
+      data.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     }
+
+  }
+  
+  // reset array if both toggles are off
+  if ((!active.sortName) && (!active.sortPriority)) {
+    data = [...tempArr];
   }
 
-  // return true if running tests
+
+  // return second item in array if running tests
   if (params[1]) return data[1];
 
   loadApp();
