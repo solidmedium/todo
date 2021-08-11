@@ -227,7 +227,7 @@ const sortHandler = (...params) => {
     active.sortName = false;
 
     if (active.sortPriority) {
-      // method is taken from https://stackoverflow.com/questions/979256/sorting-an-array-of-objects-by-property-values
+      // method taken from https://stackoverflow.com/questions/979256/sorting-an-array-of-objects-by-property-values
       data.sort((a, b) => parseFloat(b.priority) - parseFloat(a.priority));
     }
 
@@ -237,7 +237,7 @@ const sortHandler = (...params) => {
     active.sortName = true;
 
     if (active.sortName) {
-      // method is taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
+      // method taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
       data.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     }
 
@@ -245,11 +245,11 @@ const sortHandler = (...params) => {
 
     active.sortPriority = false;
     active.sortName = false;
-    // reset array if both toggles are off
+    // reset array to original if both toggles are off
     data = [...tempArr];
   }
 
-  // return second item in array if running tests
+  // return second item in array for testing
   if (params[1]) return data[1];
 
   loadApp();

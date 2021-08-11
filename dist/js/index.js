@@ -17,7 +17,7 @@ var modalComponent = {
   value: '',
   "delete": false,
   renderHTML: function renderHTML() {
-    var form = ''; // Switch UI out if delete set to true
+    var form = ''; // Switch UI when deleting a todo
 
     if (this["delete"]) {
       form = "\n        <div class=\"input-container\">\n          <h3>Your are about to delete this item</h3>\n          <input type=\"text\" disabled id=\"input-add-todo\" class=\"form-control\" id=\"\" value=\"".concat(this.value, "\">\n          <button type=\"button\" id=\"btn-save-todo\" class=\"btn btn-red\">Confirm Delete</button>\n        </div>\n      ");
@@ -281,7 +281,7 @@ var sortHandler = function sortHandler() {
     active.sortName = false;
 
     if (active.sortPriority) {
-      // method is taken from https://stackoverflow.com/questions/979256/sorting-an-array-of-objects-by-property-values
+      // method taken from https://stackoverflow.com/questions/979256/sorting-an-array-of-objects-by-property-values
       data.sort(function (a, b) {
         return parseFloat(b.priority) - parseFloat(a.priority);
       });
@@ -291,17 +291,17 @@ var sortHandler = function sortHandler() {
     active.sortName = true;
 
     if (active.sortName) {
-      // method is taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
+      // method taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
       data.sort(function (a, b) {
         return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0;
       });
     }
   } else {
     active.sortPriority = false;
-    active.sortName = false; // reset array if both toggles are off
+    active.sortName = false; // reset array to original if both toggles are off
 
     data = _toConsumableArray(tempArr);
-  } // return second item in array if running tests
+  } // return second item in array for testing
 
 
   if (arguments.length <= 1 ? undefined : arguments[1]) return data[1];

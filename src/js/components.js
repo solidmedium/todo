@@ -6,7 +6,7 @@ let modalComponent = {
   renderHTML() {
 
     let form = '';
-    // Switch UI out if delete set to true
+    // Switch UI when deleting a todo
     if (this.delete) {
       form = `
         <div class="input-container">
