@@ -69,7 +69,7 @@ function renderTable(data, active) {
   var sortName = active.sortName ? ' checked' : '';
   var sortDefault = !active.sortName && !active.sortPriority ? ' checked' : ''; // sort UI
 
-  var sortUI = "\n    <div>\n    <h3>Sort by:</h3>\n    <label class=\"switch name\" style=\"margin-right: .5rem\">\n      <input type=\"checkbox\"".concat(sortDefault, " id=\"checkbox-sort-default\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortDefaultParams, ");\" class=\"custom-control-input\">\n      <span class=\"slider round\"></span>\n    </label>\n    <label style=\"margin-right: 1rem\">None</label>\n    <label class=\"switch name\" style=\"margin-right: .5rem\">\n      <input type=\"checkbox\"").concat(sortName, " id=\"checkbox-sort-name\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortNameParams, ");\" class=\"custom-control-input\">\n      <span class=\"slider round\"></span>\n    </label>\n    <label style=\"margin-right: 1rem\">Name</label>\n    <label class=\"switch priority\" style=\"margin-right: .5rem\">\n      <input type=\"checkbox\"").concat(sortPriority, " id=\"checkbox-sort-priority\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortPriorityParams, ");\" class=\"custom-control-input\"> \n      <span class=\"slider round\"></span>\n    </label>\n    <label>Priority</label>\n    </div>\n  "); // assemble the table
+  var sortUI = "\n    <div>\n    <h3>Sort by:</h3>\n    <label class=\"custom-radio name\" style=\"margin-right: .5rem\">None\n      <input type=\"radio\"".concat(sortDefault, " id=\"checkbox-sort-default\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortDefaultParams, ");\" class=\"custom-control-input\">\n      <span class=\"checkmark\"></span>\n    </label>\n    <label class=\"custom-radio name\" style=\"margin-right: .5rem\">Name\n      <input type=\"radio\"").concat(sortName, " id=\"checkbox-sort-name\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortNameParams, ");\" class=\"custom-control-input\">\n      <span class=\"checkmark\"></span>\n    </label>\n    <label class=\"custom-radio priority\" style=\"margin-right: .5rem\">Priority\n      <input type=\"radio\"").concat(sortPriority, " id=\"checkbox-sort-priority\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortPriorityParams, ");\" class=\"custom-control-input\"> \n      <span class=\"checkmark\"></span>\n    </label>\n    </div>\n  "); // assemble the table
 
   var table = "\n   <div class=\"ui-container\">".concat(sortUI, " ").concat(addBtn, "</div>\n    <table class=\"table\">\n      <thead>\n        <tr>\n          <th>Name</th>\n          <th>Priority</th>\n          <th>Complete</th>\n          <th>Edit</th>\n        </tr>\n      </thead>\n      <tbody>\n        ").concat(rows, "\n      </tbody>\n    </table>\n    <div class=\"text-center\" style=\"margin-top: 1rem\">").concat(countComplete, " of ").concat(countTotal, " Todos Complete.</div>\n  ");
   return table.trim();
@@ -111,10 +111,7 @@ var data = [{
   priority: 1,
   complete: 0,
   publish: true
-}]; // set temp arr for data reset 
-
-var tempArr = _toConsumableArray(data);
-
+}];
 var active = {
   id: '',
   action: '',
@@ -245,8 +242,10 @@ var saveValue = function saveValue() {
 };
 
 var toggleHandler = function toggleHandler() {
-  if (!(arguments.length <= 1 ? undefined : arguments[1])) return; // params[1] === 1 Priority
-  // params[1] === 2 Complete
+  // do not run function if no params are passed
+  if (!(arguments.length <= 1 ? undefined : arguments[1])) return; // if params[1] === 1 (Priority)
+  // if params[1] === 2 (Complete)
+  // set global active states
 
   active.id = arguments.length <= 0 ? undefined : arguments[0];
   active.action = arguments.length <= 1 ? undefined : arguments[1]; // Isolate item to edit
@@ -259,42 +258,45 @@ var toggleHandler = function toggleHandler() {
     dataIsolated[0].priority = !dataIsolated[0].priority;
   } else {
     dataIsolated[0].complete = !dataIsolated[0].complete;
-  }
+  } // clear global active state
+
 
   active.id = '';
   active.action = ''; // return true if running test
 
   if (arguments.length <= 2 ? undefined : arguments[2]) return dataIsolated[0].priority;
   loadApp();
-};
+}; // clone data array for sorting reset 
+
+
+var tempArr = _toConsumableArray(data);
 
 var sortHandler = function sortHandler() {
-  if (!(arguments.length <= 0 ? undefined : arguments[0])) return;
+  // do not run function if no params are passed
+  if (!(arguments.length <= 0 ? undefined : arguments[0])) return; // if params[1] === 1 (Sort by priority)
+  // if params[1] === 2 (Sort by name)
 
   if ((arguments.length <= 0 ? undefined : arguments[0]) === 1) {
-    console.log('1 is running');
     active.sortPriority = true;
     active.sortName = false;
 
     if (active.sortPriority) {
-      // this method is taken from https://stackoverflow.com/questions/979256/sorting-an-array-of-objects-by-property-values
+      // method is taken from https://stackoverflow.com/questions/979256/sorting-an-array-of-objects-by-property-values
       data.sort(function (a, b) {
         return parseFloat(b.priority) - parseFloat(a.priority);
       });
     }
   } else if ((arguments.length <= 0 ? undefined : arguments[0]) === 2) {
-    console.log('2 is running');
     active.sortPriority = false;
     active.sortName = true;
 
     if (active.sortName) {
-      // this method is taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
+      // method is taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
       data.sort(function (a, b) {
         return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0;
       });
     }
   } else {
-    console.log('3 is running');
     active.sortPriority = false;
     active.sortName = false; // reset array if both toggles are off
 

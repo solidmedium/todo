@@ -43,9 +43,6 @@ let data = [
   } 
 ];
 
-// set temp arr for data reset 
-const tempArr = [...data];
-
 let active = {
   id: '',
   action: '',
@@ -185,15 +182,16 @@ const saveValue = (...params) => {
 }
 
 const toggleHandler = (...params) => {
-
+  // do not run function if no params are passed
   if (!params[1]) return;
 
-  // params[1] === 1 Priority
-  // params[1] === 2 Complete
+  // if params[1] === 1 (Priority)
+  // if params[1] === 2 (Complete)
 
+  // set global active states
   active.id = params[0];
   active.action = params[1];
-  // Isolate item to edit
+    // Isolate item to edit
   const dataIsolated = data.filter(p => p.id === active.id);
 
   if (active.action === 1) {
@@ -202,6 +200,7 @@ const toggleHandler = (...params) => {
     dataIsolated[0].complete = !dataIsolated[0].complete;
   }
 
+  // clear global active state
   active.id = '';
   active.action = '';
 
@@ -212,36 +211,38 @@ const toggleHandler = (...params) => {
 
 }
 
-const sortHandler = (...params) => {
+// clone data array for sorting reset 
+const tempArr = [...data];
 
+const sortHandler = (...params) => {
+  // do not run function if no params are passed
   if (!params[0]) return;
 
-  if (params[0] === 1) {
+  // if params[1] === 1 (Sort by priority)
+  // if params[1] === 2 (Sort by name)
 
-    console.log('1 is running');
+  if (params[0] === 1) {
 
     active.sortPriority = true;
     active.sortName = false;
 
     if (active.sortPriority) {
-      // this method is taken from https://stackoverflow.com/questions/979256/sorting-an-array-of-objects-by-property-values
+      // method is taken from https://stackoverflow.com/questions/979256/sorting-an-array-of-objects-by-property-values
       data.sort((a, b) => parseFloat(b.priority) - parseFloat(a.priority));
     }
 
   } else if (params[0] === 2) {
 
-    console.log('2 is running');
-    
     active.sortPriority = false;
     active.sortName = true;
 
     if (active.sortName) {
-      // this method is taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
+      // method is taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
       data.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     }
 
   } else {
-    console.log('3 is running');
+
     active.sortPriority = false;
     active.sortName = false;
     // reset array if both toggles are off
