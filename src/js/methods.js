@@ -218,29 +218,35 @@ const sortHandler = (...params) => {
 
   if (params[0] === 1) {
 
-    active.sortPriority = !active.sortPriority;
+    console.log('1 is running');
+
+    active.sortPriority = true;
+    active.sortName = false;
 
     if (active.sortPriority) {
       // this method is taken from https://stackoverflow.com/questions/979256/sorting-an-array-of-objects-by-property-values
       data.sort((a, b) => parseFloat(b.priority) - parseFloat(a.priority));
     }
 
-  } else {
+  } else if (params[0] === 2) {
+
+    console.log('2 is running');
     
-    active.sortName = !active.sortName;
+    active.sortPriority = false;
+    active.sortName = true;
 
     if (active.sortName) {
       // this method is taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
       data.sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0));
     }
 
-  }
-  
-  // reset array if both toggles are off
-  if ((!active.sortName) && (!active.sortPriority)) {
+  } else {
+    console.log('3 is running');
+    active.sortPriority = false;
+    active.sortName = false;
+    // reset array if both toggles are off
     data = [...tempArr];
   }
-
 
   // return second item in array if running tests
   if (params[1]) return data[1];

@@ -64,10 +64,12 @@ function renderTable(data, active) {
   var addBtn = "\n      <button type=\"button\" id=\"btn-launch-modal\" class=\"btn btn-green\">Add New Todo</button>\n  ";
   var sortPriorityParams = [1];
   var sortNameParams = [2];
+  var sortDefaultParams = [3];
   var sortPriority = active.sortPriority ? ' checked' : '';
-  var sortName = active.sortName ? ' checked' : ''; // sort UI
+  var sortName = active.sortName ? ' checked' : '';
+  var sortDefault = !active.sortName && !active.sortPriority ? ' checked' : ''; // sort UI
 
-  var sortUI = "\n    <div>\n    <h3>Sort by:</h3>\n    <label class=\"switch name\" style=\"margin-right: .5rem\">\n      <input type=\"checkbox\"".concat(sortName, " id=\"checkbox-sort-name\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortNameParams, ");\" class=\"custom-control-input\">\n      <span class=\"slider round\"></span>\n    </label>\n    <label style=\"margin-right: 1rem\">Name</label>\n    <label class=\"switch priority\" style=\"margin-right: .5rem\">\n      <input type=\"checkbox\"").concat(sortPriority, " id=\"checkbox-sort-priority\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortPriorityParams, ");\" class=\"custom-control-input\"> \n      <span class=\"slider round\"></span>\n    </label>\n    <label>Priority</label>\n    </div>\n  "); // assemble the table
+  var sortUI = "\n    <div>\n    <h3>Sort by:</h3>\n    <label class=\"switch name\" style=\"margin-right: .5rem\">\n      <input type=\"checkbox\"".concat(sortDefault, " id=\"checkbox-sort-default\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortDefaultParams, ");\" class=\"custom-control-input\">\n      <span class=\"slider round\"></span>\n    </label>\n    <label style=\"margin-right: 1rem\">None</label>\n    <label class=\"switch name\" style=\"margin-right: .5rem\">\n      <input type=\"checkbox\"").concat(sortName, " id=\"checkbox-sort-name\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortNameParams, ");\" class=\"custom-control-input\">\n      <span class=\"slider round\"></span>\n    </label>\n    <label style=\"margin-right: 1rem\">Name</label>\n    <label class=\"switch priority\" style=\"margin-right: .5rem\">\n      <input type=\"checkbox\"").concat(sortPriority, " id=\"checkbox-sort-priority\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortPriorityParams, ");\" class=\"custom-control-input\"> \n      <span class=\"slider round\"></span>\n    </label>\n    <label>Priority</label>\n    </div>\n  "); // assemble the table
 
   var table = "\n   <div class=\"ui-container\">".concat(sortUI, " ").concat(addBtn, "</div>\n    <table class=\"table\">\n      <thead>\n        <tr>\n          <th>Name</th>\n          <th>Priority</th>\n          <th>Complete</th>\n          <th>Edit</th>\n        </tr>\n      </thead>\n      <tbody>\n        ").concat(rows, "\n      </tbody>\n    </table>\n    <div class=\"text-center\" style=\"margin-top: 1rem\">").concat(countComplete, " of ").concat(countTotal, " Todos Complete.</div>\n  ");
   return table.trim();
@@ -270,7 +272,9 @@ var sortHandler = function sortHandler() {
   if (!(arguments.length <= 0 ? undefined : arguments[0])) return;
 
   if ((arguments.length <= 0 ? undefined : arguments[0]) === 1) {
-    active.sortPriority = !active.sortPriority;
+    console.log('1 is running');
+    active.sortPriority = true;
+    active.sortName = false;
 
     if (active.sortPriority) {
       // this method is taken from https://stackoverflow.com/questions/979256/sorting-an-array-of-objects-by-property-values
@@ -278,8 +282,10 @@ var sortHandler = function sortHandler() {
         return parseFloat(b.priority) - parseFloat(a.priority);
       });
     }
-  } else {
-    active.sortName = !active.sortName;
+  } else if ((arguments.length <= 0 ? undefined : arguments[0]) === 2) {
+    console.log('2 is running');
+    active.sortPriority = false;
+    active.sortName = true;
 
     if (active.sortName) {
       // this method is taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
@@ -287,10 +293,11 @@ var sortHandler = function sortHandler() {
         return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0;
       });
     }
-  } // reset array if both toggles are off
+  } else {
+    console.log('3 is running');
+    active.sortPriority = false;
+    active.sortName = false; // reset array if both toggles are off
 
-
-  if (!active.sortName && !active.sortPriority) {
     data = _toConsumableArray(tempArr);
   } // return second item in array if running tests
 

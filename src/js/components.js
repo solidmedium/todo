@@ -109,14 +109,21 @@ function renderTable(data, active) {
 
   const sortPriorityParams = [1];
   const sortNameParams = [2];
+  const sortDefaultParams = [3];
 
   const sortPriority = (active.sortPriority) ? ' checked' : '';
   const sortName = (active.sortName) ? ' checked' : '';
+  const sortDefault = ((!active.sortName) && (!active.sortPriority)) ? ' checked' : '';
  
   // sort UI
   const sortUI = `
     <div>
     <h3>Sort by:</h3>
+    <label class="switch name" style="margin-right: .5rem">
+      <input type="checkbox"${sortDefault} id="checkbox-sort-default" name="checkbox-sort" onchange="sortHandler(${sortDefaultParams});" class="custom-control-input">
+      <span class="slider round"></span>
+    </label>
+    <label style="margin-right: 1rem">None</label>
     <label class="switch name" style="margin-right: .5rem">
       <input type="checkbox"${sortName} id="checkbox-sort-name" name="checkbox-sort" onchange="sortHandler(${sortNameParams});" class="custom-control-input">
       <span class="slider round"></span>
