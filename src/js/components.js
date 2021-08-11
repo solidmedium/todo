@@ -119,21 +119,18 @@ function renderTable(data, active) {
   const sortUI = `
     <div>
     <h3>Sort by:</h3>
-    <label class="switch name" style="margin-right: .5rem">
-      <input type="checkbox"${sortDefault} id="checkbox-sort-default" name="checkbox-sort" onchange="sortHandler(${sortDefaultParams});" class="custom-control-input">
-      <span class="slider round"></span>
+    <label class="custom-radio name" style="margin-right: .5rem">None
+      <input type="radio"${sortDefault} id="checkbox-sort-default" name="checkbox-sort" onchange="sortHandler(${sortDefaultParams});" class="custom-control-input">
+      <span class="checkmark"></span>
     </label>
-    <label style="margin-right: 1rem">None</label>
-    <label class="switch name" style="margin-right: .5rem">
-      <input type="checkbox"${sortName} id="checkbox-sort-name" name="checkbox-sort" onchange="sortHandler(${sortNameParams});" class="custom-control-input">
-      <span class="slider round"></span>
+    <label class="custom-radio name" style="margin-right: .5rem">Name
+      <input type="radio"${sortName} id="checkbox-sort-name" name="checkbox-sort" onchange="sortHandler(${sortNameParams});" class="custom-control-input">
+      <span class="checkmark"></span>
     </label>
-    <label style="margin-right: 1rem">Name</label>
-    <label class="switch priority" style="margin-right: .5rem">
-      <input type="checkbox"${sortPriority} id="checkbox-sort-priority" name="checkbox-sort" onchange="sortHandler(${sortPriorityParams});" class="custom-control-input"> 
-      <span class="slider round"></span>
+    <label class="custom-radio priority" style="margin-right: .5rem">Priority
+      <input type="radio"${sortPriority} id="checkbox-sort-priority" name="checkbox-sort" onchange="sortHandler(${sortPriorityParams});" class="custom-control-input"> 
+      <span class="checkmark"></span>
     </label>
-    <label>Priority</label>
     </div>
   `;
 
@@ -158,7 +155,6 @@ function renderTable(data, active) {
 
   return table.trim();
 }
-
 
 export {
   modalComponent,
