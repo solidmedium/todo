@@ -191,18 +191,20 @@ const toggleHandler = (...params) => {
   // set global active states
   active.id = params[0];
   active.action = params[1];
-    // Isolate item to edit
-  const dataIsolated = data.filter(p => p.id === active.id);
+    // Isolate index to edit
+  const indexIsolated = data.findIndex(p => p.id === active.id);
 
   if (active.action === 1) {
-    dataIsolated[0].priority = !dataIsolated[0].priority;
+    data[indexIsolated].priority = (data[indexIsolated].priority == 0 ? 1 : 0);
   } else {
-    dataIsolated[0].complete = !dataIsolated[0].complete;
+    data[indexIsolated].complete = (data[indexIsolated].complete == 0 ? 1 : 0);
   }
 
   // clear global active state
   active.id = '';
   active.action = '';
+
+  console.log(data);
 
   // return true if running test
   if (params[2]) return dataIsolated[0].priority;

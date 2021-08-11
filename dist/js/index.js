@@ -197,19 +197,20 @@ var saveValue = function saveValue() {
 
   if (active.action === 2) {
     // isolate item to delete
-    var dataIsolated = data.filter(function (p) {
+    var _dataIsolated = data.filter(function (p) {
       return p.id === active.id;
     }); // set item to unpublish (soft delete)
 
-    dataIsolated[0].publish = false; // Edit function
+
+    _dataIsolated[0].publish = false; // Edit function
   } else if (active.action === 1) {
     // Isolate item to edit
-    var _dataIsolated = data.filter(function (p) {
+    var _dataIsolated2 = data.filter(function (p) {
       return p.id === active.id;
     }); // Set new value
 
 
-    _dataIsolated[0].name = value; // Create new item function
+    _dataIsolated2[0].name = value; // Create new item function
   } else {
     var count = 0;
     data.map(function () {
@@ -248,21 +249,22 @@ var toggleHandler = function toggleHandler() {
   // set global active states
 
   active.id = arguments.length <= 0 ? undefined : arguments[0];
-  active.action = arguments.length <= 1 ? undefined : arguments[1]; // Isolate item to edit
+  active.action = arguments.length <= 1 ? undefined : arguments[1]; // Isolate index to edit
 
-  var dataIsolated = data.filter(function (p) {
+  var indexIsolated = data.findIndex(function (p) {
     return p.id === active.id;
   });
 
   if (active.action === 1) {
-    dataIsolated[0].priority = !dataIsolated[0].priority;
+    data[indexIsolated].priority = data[indexIsolated].priority == 0 ? 1 : 0;
   } else {
-    dataIsolated[0].complete = !dataIsolated[0].complete;
+    data[indexIsolated].complete = data[indexIsolated].complete == 0 ? 1 : 0;
   } // clear global active state
 
 
   active.id = '';
-  active.action = ''; // return true if running test
+  active.action = '';
+  console.log(data); // return true if running test
 
   if (arguments.length <= 2 ? undefined : arguments[2]) return dataIsolated[0].priority;
   loadApp();
