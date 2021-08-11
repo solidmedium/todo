@@ -111,7 +111,10 @@ var data = [{
   priority: 1,
   complete: 0,
   publish: true
-}];
+}]; // clone data array for sorting reset 
+
+var tempArr = _toConsumableArray(data);
+
 var active = {
   id: '',
   action: '',
@@ -196,27 +199,35 @@ var saveValue = function saveValue() {
 
 
   if (active.action === 2) {
-    // isolate item to delete
-    var _dataIsolated = data.filter(function (p) {
+    // isolate index to delete
+    var indexIsolated = data.findIndex(function (p) {
       return p.id === active.id;
     }); // set item to unpublish (soft delete)
 
-
-    _dataIsolated[0].publish = false; // Edit function
+    data[indexIsolated].publish = false;
+    tempArr[indexIsolated].publish = false; // Edit function
   } else if (active.action === 1) {
-    // Isolate item to edit
-    var _dataIsolated2 = data.filter(function (p) {
+    // Isolate index to edit
+    var _indexIsolated = data.findIndex(function (p) {
       return p.id === active.id;
     }); // Set new value
 
 
-    _dataIsolated2[0].name = value; // Create new item function
+    data[_indexIsolated].name = value;
+    tempArr[_indexIsolated].name = value; // Create new item function
   } else {
     var count = 0;
     data.map(function () {
       count += 1;
     });
     data.push({
+      id: count + 1,
+      name: value,
+      priority: 0,
+      complete: 0,
+      publish: true
+    });
+    tempArr.push({
       id: count + 1,
       name: value,
       priority: 0,
@@ -266,12 +277,9 @@ var toggleHandler = function toggleHandler() {
   active.action = '';
   console.log(data); // return true if running test
 
-  if (arguments.length <= 2 ? undefined : arguments[2]) return dataIsolated[0].priority;
+  if (arguments.length <= 2 ? undefined : arguments[2]) return data[indexIsolated].priority;
   loadApp();
-}; // clone data array for sorting reset 
-
-
-var tempArr = _toConsumableArray(data);
+};
 
 var sortHandler = function sortHandler() {
   // do not run function if no params are passed

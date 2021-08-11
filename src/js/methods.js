@@ -43,6 +43,9 @@ let data = [
   } 
 ];
 
+// clone data array for sorting reset 
+let tempArr = [...data];
+
 let active = {
   id: '',
   action: '',
@@ -137,17 +140,19 @@ const saveValue = (...params) => {
 
   // Delete function
   if (active.action === 2) {
-    // isolate item to delete
-    const dataIsolated = data.filter(p => p.id === active.id);
+    // isolate index to delete
+    const indexIsolated = data.findIndex(p => p.id === active.id);
     // set item to unpublish (soft delete)
-    dataIsolated[0].publish = false;
+    data[indexIsolated].publish = false;
+    tempArr[indexIsolated].publish = false;
 
   // Edit function
   } else if (active.action === 1) {
-    // Isolate item to edit
-    const dataIsolated = data.filter(p => p.id === active.id);
+    // Isolate index to edit
+    const indexIsolated = data.findIndex(p => p.id === active.id);
     // Set new value
-    dataIsolated[0].name = value;
+    data[indexIsolated].name = value;
+    tempArr[indexIsolated].name = value;
   
   // Create new item function
   } else {
@@ -157,6 +162,14 @@ const saveValue = (...params) => {
     data.map(() => { count += 1 });
 
     data.push({
+      id: count + 1,
+      name: value,
+      priority: 0,
+      complete: 0,
+      publish: true
+    });
+
+    tempArr.push({
       id: count + 1,
       name: value,
       priority: 0,
@@ -207,14 +220,11 @@ const toggleHandler = (...params) => {
   console.log(data);
 
   // return true if running test
-  if (params[2]) return dataIsolated[0].priority;
+  if (params[2]) return data[indexIsolated].priority;
 
   loadApp();
 
 }
-
-// clone data array for sorting reset 
-const tempArr = [...data];
 
 const sortHandler = (...params) => {
   // do not run function if no params are passed
