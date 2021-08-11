@@ -35,4 +35,3 @@ test('Save New Item', () => {
 
 	expect(JSON.stringify(methods.saveValue(...params))).toBe(JSON.stringify(arr));
 });
-
