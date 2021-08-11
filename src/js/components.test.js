@@ -32,13 +32,13 @@ test('Modal Component - Edit', () => {
 test('Render Table', () => {
 
 	let data = [
-	  {
-      id: 1,
-      name: 'Apply for position @ Rocket',
-      priority: 1,
-      complete: 1,
-      publish: true
-    }
+		{
+			id: 1,
+			name: 'Apply for position @ Rocket Lab',
+			priority: 1,
+			complete: 1,
+			publish: true
+	    }
 	];
 
 	let active = {
@@ -50,11 +50,18 @@ test('Render Table', () => {
 
 	const table = `<div class="ui-container">
     <div>
-    <label style="margin-right: 1rem">
-      <input type="checkbox" id="checkbox-sort-name" name="checkbox-sort" onchange="sortHandler(2);" class="custom-control-input"> Sort by Name
+    <h3>Sort by:</h3>
+    <label class="custom-radio name" style="margin-right: .5rem">None
+      <input type="radio" checked id="checkbox-sort-default" name="checkbox-sort" onchange="sortHandler(3);" class="custom-control-input">
+      <span class="checkmark"></span>
     </label>
-    <label>
-      <input type="checkbox" id="checkbox-sort-priority" name="checkbox-sort" onchange="sortHandler(1);" class="custom-control-input"> Sort by Priority
+    <label class="custom-radio name" style="margin-right: .5rem">Name
+      <input type="radio" id="checkbox-sort-name" name="checkbox-sort" onchange="sortHandler(2);" class="custom-control-input">
+      <span class="checkmark"></span>
+    </label>
+    <label class="custom-radio priority" style="margin-right: .5rem">Priority
+      <input type="radio" id="checkbox-sort-priority" name="checkbox-sort" onchange="sortHandler(1);" class="custom-control-input"> 
+      <span class="checkmark"></span>
     </label>
     </div>
    
@@ -72,7 +79,7 @@ test('Render Table', () => {
       <tbody>
         
       <tr>
-        <td>Apply for position @ Rocket</td>
+        <td>Apply for position @ Rocket Lab</td>
         <td>
           <label class="switch">
             <input type="checkbox" checked onchange="toggleHandler(1,1);" class="custom-control-input"> Yes
