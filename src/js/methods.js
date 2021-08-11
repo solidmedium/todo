@@ -178,9 +178,6 @@ const saveValue = (...params) => {
     });
   }
 
-  active.id = '';
-  active.action = '';
-
   console.log(data);
 
   if (params[1]) {
@@ -212,10 +209,6 @@ const toggleHandler = (...params) => {
   } else {
     data[indexIsolated].complete = (data[indexIsolated].complete == 0 ? 1 : 0);
   }
-
-  // clear global active state
-  active.id = '';
-  active.action = '';
 
   console.log(data);
 
@@ -268,9 +261,9 @@ const sortHandler = (...params) => {
 
 }
 
-
 const loadApp = () => {
 
+  // global active state
   active.id = '';
   active.action = '';
   

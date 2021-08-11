@@ -236,8 +236,6 @@ var saveValue = function saveValue() {
     });
   }
 
-  active.id = '';
-  active.action = '';
   console.log(data);
 
   if (arguments.length <= 1 ? undefined : arguments[1]) {
@@ -270,11 +268,8 @@ var toggleHandler = function toggleHandler() {
     data[indexIsolated].priority = data[indexIsolated].priority == 0 ? 1 : 0;
   } else {
     data[indexIsolated].complete = data[indexIsolated].complete == 0 ? 1 : 0;
-  } // clear global active state
+  }
 
-
-  active.id = '';
-  active.action = '';
   console.log(data); // return true if running test
 
   if (arguments.length <= 2 ? undefined : arguments[2]) return data[indexIsolated].priority;
@@ -319,6 +314,7 @@ var sortHandler = function sortHandler() {
 };
 
 var loadApp = function loadApp() {
+  // global active state
   active.id = '';
   active.action = '';
   var tableHTML = renderTable(data, active);
