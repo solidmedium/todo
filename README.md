@@ -9,12 +9,12 @@
 
 1. Open Terminal
 2. Type ```cd (path to projects folder) /todo``` 
-3. Type ```yarn``` to install all dependancies
+3. Type ```yarn``` to install all dependancies or ```npm i```
 4. Type ```gulp``` to compile and start watching assets contained in 'src' folder
 
 ## To run tests
 
 1. Open terminal
 2. Type ```cd (path to projects folder) /todo``` 
-3. Type ```yarn jest```
+3. Type ```yarn jest``` or ```npm jest```
 
