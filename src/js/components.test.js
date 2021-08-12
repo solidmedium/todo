@@ -17,7 +17,7 @@ test('Modal Component - Edit', () => {
         <div class="modal-body">
            
         <div class="input-container">
-          <input type="text" placeholder="Add New Todo" id="input-add-todo" class="form-control" value="Take out the trash">
+          <input type="text" placeholder="Add New To-do" id="input-add-todo" class="form-control" value="Take out the trash">
           <button type="button" id="btn-save-todo" class="btn btn-green">GO</button>
         </div>
       
@@ -69,7 +69,7 @@ test('Render Table', () => {
     </label>
     </div>
    
-      <button type="button" id="btn-launch-modal" class="btn btn-green">Add New Todo</button>
+      <button type="button" id="btn-launch-modal" class="btn btn-green">Add New To-do</button>
   </div>
     <table class="table">
       <thead>
@@ -104,7 +104,7 @@ test('Render Table', () => {
     
       </tbody>
     </table>
-    <div class="text-center" style="margin-top: 1rem">1 of 1 Todos Complete.</div>`;
+    <div class="text-center" style="margin-top: 1rem">1 of 1 To-dos Complete.</div>`;
 
 	expect(component.renderTable(data, active)).toBe(table);
 });
