@@ -1,4 +1,4 @@
-# Vanila Javascript To-do List
+# Vanilla Javascript To-do List
 
 ## To view the application:
 
