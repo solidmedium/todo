@@ -180,7 +180,12 @@ var renderModal = function renderModal() {
   } // add lister to save btn
 
 
-  document.getElementById("btn-save-todo").addEventListener("click", saveValue); // Add listener to close modal button
+  document.getElementById("btn-save-todo").addEventListener("click", saveValue); // Add listener to enter key
+
+  document.getElementById('input-add-todo').addEventListener('keypress', function (e) {
+    // save on enter key press
+    if (e.key === 'Enter') saveValue();
+  }); // Add listener to close modal button
 
   document.getElementById("btn-close-modal").addEventListener("click", closeModal);
   setTimeout(function () {
