@@ -1,12 +1,12 @@
 
 let modalComponent = {
-  title: 'Add New Todo',
+  title: 'Add New To-do',
   value: '',
   delete: false,
   renderHTML() {
 
     let form = '';
-    // Switch UI when deleting a todo
+    // Switch UI when deleting a to-do
     if (this.delete) {
       form = `
         <div class="input-container">
@@ -44,7 +44,7 @@ let modalComponent = {
 
 function editModalTest() {
   const modal = Object.create(modalComponent);
-  modal.title = 'Add New Todo';
+  modal.title = 'Add New To-do';
   modal.value = 'Take out the trash';
   return modal.renderHTML();
 
@@ -104,7 +104,7 @@ function renderTable(data, active) {
 
   // create button
   const addBtn = `
-      <button type="button" id="btn-launch-modal" class="btn btn-green">Add New Todo</button>
+      <button type="button" id="btn-launch-modal" class="btn btn-green">Add New To-do</button>
   `;
 
   const sortPriorityParams = [1];
@@ -156,7 +156,7 @@ function renderTable(data, active) {
         ${rows}
       </tbody>
     </table>
-    <div class="text-center" style="margin-top: 1rem">${countComplete} of ${countTotal} Todos Complete.</div>
+    <div class="text-center" style="margin-top: 1rem">${countComplete} of ${countTotal} To-dos Complete.</div>
   `;
 
   return table.trim();

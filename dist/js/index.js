@@ -13,11 +13,11 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 var modalComponent = {
-  title: 'Add New Todo',
+  title: 'Add New To-do',
   value: '',
   "delete": false,
   renderHTML: function renderHTML() {
-    var form = ''; // Switch UI when deleting a todo
+    var form = ''; // Switch UI when deleting a to-do
 
     if (this["delete"]) {
       form = "\n        <div class=\"input-container\">\n          <h3>Your are about to delete this item</h3>\n          <input type=\"text\" disabled id=\"input-add-todo\" class=\"form-control\" id=\"\" value=\"".concat(this.value, "\">\n          <button type=\"button\" id=\"btn-save-todo\" class=\"btn btn-red\">Confirm Delete</button>\n        </div>\n      ");
@@ -61,7 +61,7 @@ function renderTable(data, active) {
     rows += "\n      <tr>\n        <td>".concat(items.name, "</td>\n        <td>\n          <label class=\"switch\">\n            <input type=\"checkbox\"").concat(priority, " onchange=\"toggleHandler(").concat(priorityParams, ");\" class=\"custom-control-input\">").concat(priorityText, "\n            <span class=\"slider round\"></span>\n          </label>\n        </td>\n        <td>\n          <label class=\"switch\">\n            <input type=\"checkbox\"").concat(complete, " onchange=\"toggleHandler(").concat(completeParams, ");\" class=\"custom-control-input\">").concat(completeText, "\n            <span class=\"slider round\"></span>\n          </label>\n        </td>\n        <td>").concat(btns, "</td>\n      </tr>\n    ");
   }); // create button
 
-  var addBtn = "\n      <button type=\"button\" id=\"btn-launch-modal\" class=\"btn btn-green\">Add New Todo</button>\n  ";
+  var addBtn = "\n      <button type=\"button\" id=\"btn-launch-modal\" class=\"btn btn-green\">Add New To-do</button>\n  ";
   var sortPriorityParams = [1];
   var sortNameParams = [2];
   var sortCompletedParams = [4];
@@ -73,7 +73,7 @@ function renderTable(data, active) {
 
   var sortUI = "\n    <div>\n    <h3>Sort by:</h3>\n    <label class=\"custom-radio name\" style=\"margin-right: .5rem\">None\n      <input type=\"radio\"".concat(sortDefault, " id=\"checkbox-sort-default\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortDefaultParams, ");\" class=\"custom-control-input\">\n      <span class=\"checkmark\"></span>\n    </label>\n    <label class=\"custom-radio name\" style=\"margin-right: .5rem\">Name\n      <input type=\"radio\"").concat(sortName, " id=\"checkbox-sort-name\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortNameParams, ");\" class=\"custom-control-input\">\n      <span class=\"checkmark\"></span>\n    </label>\n    <label class=\"custom-radio priority\" style=\"margin-right: .5rem\">Priority\n      <input type=\"radio\"").concat(sortPriority, " id=\"checkbox-sort-priority\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortPriorityParams, ");\" class=\"custom-control-input\"> \n      <span class=\"checkmark\"></span>\n    </label>\n    <label class=\"custom-radio complated\" style=\"margin-right: .5rem\">Completed\n      <input type=\"radio\"").concat(sortCompleted, " id=\"checkbox-sort-complated\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortCompletedParams, ");\" class=\"custom-control-input\"> \n      <span class=\"checkmark\"></span>\n    </label>\n    </div>\n  "); // assemble the table
 
-  var table = "\n   <div class=\"ui-container\">".concat(sortUI, " ").concat(addBtn, "</div>\n    <table class=\"table\">\n      <thead>\n        <tr>\n          <th>Name</th>\n          <th>Priority</th>\n          <th>Complete</th>\n          <th>Edit</th>\n        </tr>\n      </thead>\n      <tbody>\n        ").concat(rows, "\n      </tbody>\n    </table>\n    <div class=\"text-center\" style=\"margin-top: 1rem\">").concat(countComplete, " of ").concat(countTotal, " Todos Complete.</div>\n  ");
+  var table = "\n   <div class=\"ui-container\">".concat(sortUI, " ").concat(addBtn, "</div>\n    <table class=\"table\">\n      <thead>\n        <tr>\n          <th>Name</th>\n          <th>Priority</th>\n          <th>Complete</th>\n          <th>Edit</th>\n        </tr>\n      </thead>\n      <tbody>\n        ").concat(rows, "\n      </tbody>\n    </table>\n    <div class=\"text-center\" style=\"margin-top: 1rem\">").concat(countComplete, " of ").concat(countTotal, " To-dos Complete.</div>\n  ");
   return table.trim();
 }
 
@@ -149,7 +149,7 @@ var renderModal = function renderModal() {
   // params[1] === 2 Delete
   // Generate new modal object
   var modal = Object.create(modalComponent);
-  modal.title = 'Add New Todo'; // check params for edit or delete
+  modal.title = 'Add New To-do'; // check params for edit or delete
 
   if (params[1]) {
     active.id = params[0];
@@ -357,7 +357,7 @@ var loadApp = function loadApp() {
   active.action = '';
   var tableHTML = renderTable(data, active);
   var mount = document.getElementById('app-mount-point');
-  mount.innerHTML = tableHTML; // Listen for add todo click
+  mount.innerHTML = tableHTML; // Listen for add to-do click
 
   document.getElementById("btn-launch-modal").addEventListener("click", renderModal);
   toggleHandler();

@@ -79,7 +79,7 @@ const renderModal = (...params) => {
  
   // Generate new modal object
   const modal = Object.create(modalComponent);
-  modal.title = 'Add New Todo';
+  modal.title = 'Add New To-do';
 
   // check params for edit or delete
   if (params[1]) {
@@ -312,7 +312,7 @@ const loadApp = () => {
 
   mount.innerHTML = tableHTML;
 
-  // Listen for add todo click
+  // Listen for add to-do click
   document.getElementById("btn-launch-modal").addEventListener("click", renderModal);
       
   toggleHandler();
