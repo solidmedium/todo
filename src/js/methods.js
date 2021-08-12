@@ -50,7 +50,8 @@ let active = {
   id: '',
   action: '',
   sortPriority: false,
-  sortName: false
+  sortName: false,
+  sortCompleted: false
 }
 
 /* ########################
@@ -225,21 +226,36 @@ const sortHandler = (...params) => {
 
   // if params[1] === 1 (Sort by priority)
   // if params[1] === 2 (Sort by name)
+  // if params[1] === 3 (Sort by default)
+  // if params[1] === 4 (Sort by complete)
 
   if (params[0] === 1) {
 
     active.sortPriority = true;
     active.sortName = false;
+    active.sortCompleted = false;
 
     if (active.sortPriority) {
       // method taken from https://stackoverflow.com/questions/979256/sorting-an-array-of-objects-by-property-values
       data.sort((a, b) => parseFloat(b.priority) - parseFloat(a.priority));
     }
 
+  } else if (params[0] === 4) {
+
+    active.sortPriority = false;
+    active.sortName = false;
+    active.sortCompleted = true;
+
+    if (active.sortCompleted) {
+      // method taken from https://stackoverflow.com/questions/979256/sorting-an-array-of-objects-by-property-values
+      data.sort((a, b) => parseFloat(b.complete) - parseFloat(a.complete));
+    }
+
   } else if (params[0] === 2) {
 
     active.sortPriority = false;
     active.sortName = true;
+    active.sortCompleted = false;
 
     if (active.sortName) {
       // method taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value

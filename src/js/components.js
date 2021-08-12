@@ -109,10 +109,12 @@ function renderTable(data, active) {
 
   const sortPriorityParams = [1];
   const sortNameParams = [2];
+  const sortCompletedParams = [4];
   const sortDefaultParams = [3];
 
   const sortPriority = (active.sortPriority) ? ' checked' : '';
   const sortName = (active.sortName) ? ' checked' : '';
+  const sortCompleted = (active.sortCompleted) ? ' checked' : '';
   const sortDefault = ((!active.sortName) && (!active.sortPriority)) ? ' checked' : '';
  
   // sort UI
@@ -129,6 +131,10 @@ function renderTable(data, active) {
     </label>
     <label class="custom-radio priority" style="margin-right: .5rem">Priority
       <input type="radio"${sortPriority} id="checkbox-sort-priority" name="checkbox-sort" onchange="sortHandler(${sortPriorityParams});" class="custom-control-input"> 
+      <span class="checkmark"></span>
+    </label>
+    <label class="custom-radio complated" style="margin-right: .5rem">Completed
+      <input type="radio"${sortCompleted} id="checkbox-sort-complated" name="checkbox-sort" onchange="sortHandler(${sortCompletedParams});" class="custom-control-input"> 
       <span class="checkmark"></span>
     </label>
     </div>

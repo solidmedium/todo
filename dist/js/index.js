@@ -64,12 +64,14 @@ function renderTable(data, active) {
   var addBtn = "\n      <button type=\"button\" id=\"btn-launch-modal\" class=\"btn btn-green\">Add New Todo</button>\n  ";
   var sortPriorityParams = [1];
   var sortNameParams = [2];
+  var sortCompletedParams = [4];
   var sortDefaultParams = [3];
   var sortPriority = active.sortPriority ? ' checked' : '';
   var sortName = active.sortName ? ' checked' : '';
+  var sortCompleted = active.sortCompleted ? ' checked' : '';
   var sortDefault = !active.sortName && !active.sortPriority ? ' checked' : ''; // sort UI
 
-  var sortUI = "\n    <div>\n    <h3>Sort by:</h3>\n    <label class=\"custom-radio name\" style=\"margin-right: .5rem\">None\n      <input type=\"radio\"".concat(sortDefault, " id=\"checkbox-sort-default\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortDefaultParams, ");\" class=\"custom-control-input\">\n      <span class=\"checkmark\"></span>\n    </label>\n    <label class=\"custom-radio name\" style=\"margin-right: .5rem\">Name\n      <input type=\"radio\"").concat(sortName, " id=\"checkbox-sort-name\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortNameParams, ");\" class=\"custom-control-input\">\n      <span class=\"checkmark\"></span>\n    </label>\n    <label class=\"custom-radio priority\" style=\"margin-right: .5rem\">Priority\n      <input type=\"radio\"").concat(sortPriority, " id=\"checkbox-sort-priority\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortPriorityParams, ");\" class=\"custom-control-input\"> \n      <span class=\"checkmark\"></span>\n    </label>\n    </div>\n  "); // assemble the table
+  var sortUI = "\n    <div>\n    <h3>Sort by:</h3>\n    <label class=\"custom-radio name\" style=\"margin-right: .5rem\">None\n      <input type=\"radio\"".concat(sortDefault, " id=\"checkbox-sort-default\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortDefaultParams, ");\" class=\"custom-control-input\">\n      <span class=\"checkmark\"></span>\n    </label>\n    <label class=\"custom-radio name\" style=\"margin-right: .5rem\">Name\n      <input type=\"radio\"").concat(sortName, " id=\"checkbox-sort-name\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortNameParams, ");\" class=\"custom-control-input\">\n      <span class=\"checkmark\"></span>\n    </label>\n    <label class=\"custom-radio priority\" style=\"margin-right: .5rem\">Priority\n      <input type=\"radio\"").concat(sortPriority, " id=\"checkbox-sort-priority\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortPriorityParams, ");\" class=\"custom-control-input\"> \n      <span class=\"checkmark\"></span>\n    </label>\n    <label class=\"custom-radio complated\" style=\"margin-right: .5rem\">Completed\n      <input type=\"radio\"").concat(sortCompleted, " id=\"checkbox-sort-complated\" name=\"checkbox-sort\" onchange=\"sortHandler(").concat(sortCompletedParams, ");\" class=\"custom-control-input\"> \n      <span class=\"checkmark\"></span>\n    </label>\n    </div>\n  "); // assemble the table
 
   var table = "\n   <div class=\"ui-container\">".concat(sortUI, " ").concat(addBtn, "</div>\n    <table class=\"table\">\n      <thead>\n        <tr>\n          <th>Name</th>\n          <th>Priority</th>\n          <th>Complete</th>\n          <th>Edit</th>\n        </tr>\n      </thead>\n      <tbody>\n        ").concat(rows, "\n      </tbody>\n    </table>\n    <div class=\"text-center\" style=\"margin-top: 1rem\">").concat(countComplete, " of ").concat(countTotal, " Todos Complete.</div>\n  ");
   return table.trim();
@@ -119,7 +121,8 @@ var active = {
   id: '',
   action: '',
   sortPriority: false,
-  sortName: false
+  sortName: false,
+  sortCompleted: false
 };
 /* ########################
 ######### METHODS #########
@@ -280,10 +283,13 @@ var sortHandler = function sortHandler() {
   // do not run function if no params are passed
   if (!(arguments.length <= 0 ? undefined : arguments[0])) return; // if params[1] === 1 (Sort by priority)
   // if params[1] === 2 (Sort by name)
+  // if params[1] === 3 (Sort by default)
+  // if params[1] === 4 (Sort by complete)
 
   if ((arguments.length <= 0 ? undefined : arguments[0]) === 1) {
     active.sortPriority = true;
     active.sortName = false;
+    active.sortCompleted = false;
 
     if (active.sortPriority) {
       // method taken from https://stackoverflow.com/questions/979256/sorting-an-array-of-objects-by-property-values
@@ -291,9 +297,21 @@ var sortHandler = function sortHandler() {
         return parseFloat(b.priority) - parseFloat(a.priority);
       });
     }
+  } else if ((arguments.length <= 0 ? undefined : arguments[0]) === 4) {
+    active.sortPriority = false;
+    active.sortName = false;
+    active.sortCompleted = true;
+
+    if (active.sortCompleted) {
+      // method taken from https://stackoverflow.com/questions/979256/sorting-an-array-of-objects-by-property-values
+      data.sort(function (a, b) {
+        return parseFloat(b.complete) - parseFloat(a.complete);
+      });
+    }
   } else if ((arguments.length <= 0 ? undefined : arguments[0]) === 2) {
     active.sortPriority = false;
     active.sortName = true;
+    active.sortCompleted = false;
 
     if (active.sortName) {
       // method taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
