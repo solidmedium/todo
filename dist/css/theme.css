@@ -1,6 +1,13 @@
-body {
+body.light {
   color: #425466;
   background-color: #F6F9FC; }
+
+body.dark {
+  color: white;
+  background-color: #242e38; }
+
+body * {
+  transition: all ease .2s; }
 
 .container {
   max-width: 800px;
@@ -11,6 +18,8 @@ body {
     border-radius: 20px;
     padding: 40px;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.02); }
+    .dark .container#app-mount-point {
+      background-color: #425466; }
 
 .text-right {
   text-align: right; }
@@ -30,6 +39,8 @@ body {
       text-align: right; }
   .table tbody tr:hover {
     background-color: #F6F9FC; }
+    .dark .table tbody tr:hover {
+      background-color: #4c6175; }
   .table tbody td {
     vertical-align: middle;
     border-bottom: 1px solid #8898AD;
@@ -38,13 +49,15 @@ body {
       text-align: right; }
 
 .btn {
-  background-color: white;
   border: solid 1px #425466;
   color: #425466;
   border-radius: 20px;
   padding: 2px 15px;
   font-size: .9rem;
-  transition: all ease .3s; }
+  transition: all ease .3s;
+  background-color: white; }
+  .dark .btn {
+    background-color: #425466; }
   .btn:hover, .btn:focus, .btn:active {
     color: white !important;
     cursor: pointer;
@@ -79,7 +92,6 @@ body {
   top: 20px;
   right: 20px;
   bottom: 20px;
-  background-color: white;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   display: flex;
@@ -87,7 +99,10 @@ body {
   transition: all ease-out .2s;
   opacity: 0;
   transform: scale(0.8) translateY(-10%);
-  z-index: 2; }
+  z-index: 2;
+  background-color: white; }
+  .dark .modal {
+    background-color: #425466; }
   .modal.active {
     opacity: 1;
     transform: scale(1) translateY(0); }
@@ -108,6 +123,9 @@ body {
   border-radius: 40px;
   padding: 15px 30px;
   transform: translateY(-35px); }
+  .dark .input-container input {
+    background-color: #425466;
+    color: white; }
 
 .form-control {
   border: 0;
@@ -174,6 +192,17 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%; }
+
+.theme-switch-container {
+  padding: 10px 20px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.02);
+  display: flex;
+  justify-content: space-between;
+  background-color: white; }
+  .dark .theme-switch-container {
+    background-color: #425466; }
+  .theme-switch-container label {
+    margin: 0; }
 
 /* Customize the label (the container) */
 .custom-radio {

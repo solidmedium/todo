@@ -63,6 +63,10 @@ test('Render Table', () => {
       <input type="radio" id="checkbox-sort-priority" name="checkbox-sort" onchange="sortHandler(1);" class="custom-control-input"> 
       <span class="checkmark"></span>
     </label>
+    <label class="custom-radio complated" style="margin-right: .5rem">Completed
+      <input type="radio" id="checkbox-sort-complated" name="checkbox-sort" onchange="sortHandler(4);" class="custom-control-input"> 
+      <span class="checkmark"></span>
+    </label>
     </div>
    
       <button type="button" id="btn-launch-modal" class="btn btn-green">Add New Todo</button>

@@ -6,7 +6,17 @@
     <link rel="stylesheet" type="text/css" href="css/reboot.css">
     <link rel="stylesheet" type="text/css" href="css/theme.css">
   </head>
-  <body>
+  <body id="body" class="light">
+    <div class="theme-switch-container">
+      <b>Solid Medium</b>
+      <div>
+        <label>Toggle Theme</label>
+        <label class="switch">
+          <input type="checkbox" onchange="toggleTheme(1);" class="custom-control-input">
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
     <header class="container text-center">
       <h1>The Ultimate Todo List</h1>
     </header>

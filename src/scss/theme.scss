@@ -19,8 +19,20 @@ $cyan:    #0dcaf0;
 
 
 body {
-	color: $theme-gray-dark;
-	background-color: $theme-gray-lighter;
+
+	&.light {
+		color: $theme-gray-dark;
+		background-color: $theme-gray-lighter;
+	}
+
+	&.dark {
+		color: white;
+		background-color: darken($theme-gray-dark, 15%);
+	}
+
+	& * {
+		transition: all ease .2s;
+	}
 }
 
 .container {
@@ -29,7 +41,13 @@ body {
 	margin: 3rem auto;
 
 	&#app-mount-point {
+
 		background-color: white;
+
+		.dark & {
+			background-color: $theme-gray-dark;
+		}
+
 		border-radius: 20px;
 		padding: 40px;
 		box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.02);
@@ -67,7 +85,13 @@ body {
 
 		tr {
 			 &:hover {
+
 		    	background-color: $theme-gray-lighter;
+
+			 		.dark & {
+			    	background-color: lighten($theme-gray-dark, 5%);
+
+			 		}
 		    }
 		}
 
@@ -84,13 +108,17 @@ body {
 }
 
 .btn {
-	background-color: white;
 	border: solid 1px $theme-gray-dark;
 	color: $theme-gray-dark;
 	border-radius: 20px;
 	padding: 2px 15px;
 	font-size: .9rem;
 	transition: all ease .3s;
+	background-color: white;
+
+	.dark & {
+		background-color: $theme-gray-dark;
+	}
 
 	&:hover,
 	&:focus,
@@ -152,7 +180,6 @@ body {
 	top: 20px;
 	right: 20px;
 	bottom: 20px;
-	background-color: white;
 	box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
 	border-radius: 10px;
 	display: flex;
@@ -161,6 +188,11 @@ body {
 	opacity: 0;
 	transform: scale(.8) translateY(-10%);
 	z-index: 2;
+	background-color: white;
+
+	.dark & {
+		background-color: $theme-gray-dark;
+	}
 
 	&.active {
 		opacity: 1;
@@ -188,6 +220,13 @@ body {
 	border-radius: 40px;
 	padding: 15px 30px;
 	transform: translateY(-35px);
+
+	input {
+		.dark & {
+			background-color: $theme-gray-dark;
+			color: white;
+		}
+	}
 }
 
 .form-control {
@@ -273,6 +312,22 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.theme-switch-container {
+	padding: 10px 20px;
+	box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.02);
+	display: flex;
+	justify-content: space-between;
+	background-color: white;
+
+	.dark & {
+		background-color: $theme-gray-dark;
+	}
+
+	label {
+		margin: 0;
+	}
 }
 
 // custom radio taken from https://www.w3schools.com/howto/howto_css_custom_checkbox.asp

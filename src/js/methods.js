@@ -51,7 +51,8 @@ let active = {
   action: '',
   sortPriority: false,
   sortName: false,
-  sortCompleted: false
+  sortCompleted: false,
+  theme: 0
 }
 
 /* ########################
@@ -266,6 +267,7 @@ const sortHandler = (...params) => {
 
     active.sortPriority = false;
     active.sortName = false;
+    active.sortCompleted = false;
     // reset array to original if both toggles are off
     data = [...tempArr];
   }
@@ -275,6 +277,25 @@ const sortHandler = (...params) => {
 
   loadApp();
 
+}
+
+const toggleTheme = (param) => {
+  // do not run function if no params are passed
+  if (!param) return;
+
+  active.theme = (active.theme == 0 ? 1 : 0);
+
+  const body = document.getElementById('body');
+
+  if (active.theme === 1) {
+    body.classList.remove("light");
+    body.classList.add("dark");
+  } else {
+    body.classList.remove("dark");
+    body.classList.add("light");
+  }
+
+  console.log('boom')
 }
 
 const loadApp = () => {
@@ -294,6 +315,8 @@ const loadApp = () => {
   toggleHandler();
 
   sortHandler();
+
+  toggleTheme();
 
 }
 

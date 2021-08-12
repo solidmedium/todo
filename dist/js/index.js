@@ -122,7 +122,8 @@ var active = {
   action: '',
   sortPriority: false,
   sortName: false,
-  sortCompleted: false
+  sortCompleted: false,
+  theme: 0
 };
 /* ########################
 ######### METHODS #########
@@ -321,7 +322,8 @@ var sortHandler = function sortHandler() {
     }
   } else {
     active.sortPriority = false;
-    active.sortName = false; // reset array to original if both toggles are off
+    active.sortName = false;
+    active.sortCompleted = false; // reset array to original if both toggles are off
 
     data = _toConsumableArray(tempArr);
   } // return second item in array for testing
@@ -329,6 +331,23 @@ var sortHandler = function sortHandler() {
 
   if (arguments.length <= 1 ? undefined : arguments[1]) return data[1];
   loadApp();
+};
+
+var toggleTheme = function toggleTheme(param) {
+  // do not run function if no params are passed
+  if (!param) return;
+  active.theme = active.theme == 0 ? 1 : 0;
+  var body = document.getElementById('body');
+
+  if (active.theme === 1) {
+    body.classList.remove("light");
+    body.classList.add("dark");
+  } else {
+    body.classList.remove("dark");
+    body.classList.add("light");
+  }
+
+  console.log('boom');
 };
 
 var loadApp = function loadApp() {
@@ -342,6 +361,7 @@ var loadApp = function loadApp() {
   document.getElementById("btn-launch-modal").addEventListener("click", renderModal);
   toggleHandler();
   sortHandler();
+  toggleTheme();
 };
 
 document.addEventListener("DOMContentLoaded", loadApp);
