@@ -57,7 +57,7 @@ body * {
   transition: all ease .3s;
   background-color: white; }
   .dark .btn {
-    background-color: #425466; }
+    background-color: #242e38; }
   .btn:hover, .btn:focus, .btn:active {
     color: white !important;
     cursor: pointer;
@@ -201,6 +201,8 @@ input:checked + .slider:before {
   background-color: white; }
   .dark .theme-switch-container {
     background-color: #425466; }
+  .theme-switch-container b {
+    color: #0dcaf0; }
   .theme-switch-container label {
     margin: 0; }
 
