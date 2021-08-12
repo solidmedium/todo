@@ -145,10 +145,9 @@ var renderModal = function renderModal() {
     params[_key] = arguments[_key];
   }
 
-  console.log(params[0], params[1]); // params[1] === 1 Edit
+  // params[1] === 1 Edit
   // params[1] === 2 Delete
   // Generate new modal object
-
   var modal = Object.create(modalComponent);
   modal.title = 'Add New Todo'; // check params for edit or delete
 
@@ -240,8 +239,6 @@ var saveValue = function saveValue() {
     });
   }
 
-  console.log(data);
-
   if (arguments.length <= 1 ? undefined : arguments[1]) {
     // isolate new test item
     var testDataIsolated = data.filter(function (p) {
@@ -272,9 +269,8 @@ var toggleHandler = function toggleHandler() {
     data[indexIsolated].priority = data[indexIsolated].priority == 0 ? 1 : 0;
   } else {
     data[indexIsolated].complete = data[indexIsolated].complete == 0 ? 1 : 0;
-  }
+  } // return true if running test
 
-  console.log(data); // return true if running test
 
   if (arguments.length <= 2 ? undefined : arguments[2]) return data[indexIsolated].priority;
   loadApp();
@@ -336,18 +332,18 @@ var sortHandler = function sortHandler() {
 var toggleTheme = function toggleTheme(param) {
   // do not run function if no params are passed
   if (!param) return;
-  active.theme = active.theme == 0 ? 1 : 0;
+  active.theme = active.theme == 0 ? 1 : 0; // return active theme for test
+
+  if (param === 3) return active.theme;
   var body = document.getElementById('body');
 
   if (active.theme === 1) {
     body.classList.remove("light");
     body.classList.add("dark");
-  } else {
+  } else if (active.theme === 0) {
     body.classList.remove("dark");
     body.classList.add("light");
   }
-
-  console.log('boom');
 };
 
 var loadApp = function loadApp() {

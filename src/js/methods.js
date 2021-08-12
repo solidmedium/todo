@@ -74,8 +74,6 @@ const closeModal = () => {
 
 const renderModal = (...params) => {
 
-  console.log(params[0], params[1]);
-
   // params[1] === 1 Edit
   // params[1] === 2 Delete
  
@@ -180,8 +178,6 @@ const saveValue = (...params) => {
     });
   }
 
-  console.log(data);
-
   if (params[1]) {
     // isolate new test item
     const testDataIsolated = data.filter(p => p.id === 7);
@@ -211,8 +207,6 @@ const toggleHandler = (...params) => {
   } else {
     data[indexIsolated].complete = (data[indexIsolated].complete == 0 ? 1 : 0);
   }
-
-  console.log(data);
 
   // return true if running test
   if (params[2]) return data[indexIsolated].priority;
@@ -285,17 +279,19 @@ const toggleTheme = (param) => {
 
   active.theme = (active.theme == 0 ? 1 : 0);
 
+  // return active theme for test
+  if (param === 3) return active.theme;
+
   const body = document.getElementById('body');
 
   if (active.theme === 1) {
     body.classList.remove("light");
     body.classList.add("dark");
-  } else {
+  } else if (active.theme === 0) {
     body.classList.remove("dark");
     body.classList.add("light");
   }
 
-  console.log('boom')
 }
 
 const loadApp = () => {
@@ -328,6 +324,7 @@ export {
   closeModal,
   renderModal,
   saveValue,
+  toggleTheme,
   loadApp
 }
 

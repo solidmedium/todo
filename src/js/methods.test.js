@@ -35,3 +35,8 @@ test('Save New Item', () => {
 
 	expect(JSON.stringify(methods.saveValue(...params))).toBe(JSON.stringify(arr));
 });
+
+test('Theme switch', () => {
+
+	expect(methods.toggleTheme(3)).toBe(1);
+});
